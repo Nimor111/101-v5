@@ -19,4 +19,9 @@ def word_counter():
     return "ERR"
 
 
-print(word_counter())
+def main():
+    print(word_counter())
+
+
+if __name__ == '__main__':
+    main()
