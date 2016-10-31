@@ -14,7 +14,7 @@ def word_counter():
         length = 0
         for el in str(lines).split(' '):
             length += len(el) + 1
-        return length - len(lines) * 3
+        return length
 
     return "ERR"
 
