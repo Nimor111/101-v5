@@ -28,20 +28,32 @@ class Fraction:
     def __mul__(self, other):
         frac = simplify_fraction((self.numerator * other.numerator,
                                   self.denominator * other.denominator))
+        if type(frac) != tuple:
+            return frac
+        if frac[1] == 1:
+            return frac[0]
         return Fraction(frac[0], frac[1])
 
     def __add__(self, other):
-        mult = smallest_denom(self.denominator, other.denominator)
-        frac = simplify_fraction((mult // self.denominator * self.numerator +
-                                 mult // other.denominator * other.numerator,
-                                 mult))
+        add = smallest_denom(self.denominator, other.denominator)
+        frac = simplify_fraction((add // self.denominator * self.numerator +
+                                 add // other.denominator * other.numerator,
+                                 add))
+        if type(frac) != tuple:
+            return frac
+        if frac[1] == 1:
+            return frac[0]
         return Fraction(frac[0], frac[1])
 
     def __sub__(self, other):
-        mult = smallest_denom(self.denominator, other.denominator)
-        frac = simplify_fraction((mult // self.denominator * self.numerator -
-                                 mult // other.denominator * other.numerator,
-                                 mult))
+        sub = smallest_denom(self.denominator, other.denominator)
+        frac = simplify_fraction((sub // self.denominator * self.numerator -
+                                 sub // other.denominator * other.numerator,
+                                 sub))
+        if type(frac) != tuple:
+            return frac
+        if frac[1] == 1:
+            return frac[0]
         return Fraction(frac[0], frac[1])
 
 

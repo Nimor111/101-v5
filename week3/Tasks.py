@@ -16,6 +16,12 @@ def gcd_second(a, b):
 
 
 def simplify_fraction(fraction):
+    if fraction[0] == fraction[1]:
+        return 1
+    if fraction[0] == 0:
+        return 0
+    if fraction[1] == 0:
+        raise ZeroDivisionError
     return (fraction[0] // gcd_second(fraction[0], fraction[1]),
             fraction[1] // gcd_second(fraction[0], fraction[1]))
 
@@ -31,7 +37,8 @@ def main():
     print(simplify_fraction((63, 462)))
     print(sort_fractions([(2, 3), (1, 2)]))
     print(sort_fractions([(2, 3), (1, 2), (1, 3)]))
-    print(sort_fractions([(5, 6), (22, 78), (22, 7), (7, 8), (9, 6), (15, 32)]))
+    print(sort_fractions([(5, 6), (22, 78), (22, 7), (7, 8),
+                          (9, 6), (15, 32)]))
 
 
 if __name__ == '__main__':
