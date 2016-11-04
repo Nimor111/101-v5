@@ -88,7 +88,7 @@ class Parser:
         monomial.append(re.findall(r'[\^]+', string))
         monomial[:] = filter(lambda x: x != [], monomial)
         # insert 1 for easier calculating
-        if len(monomial[0]) == 1 and ['x'] in monomial[0]:
+        if len(monomial[0]) == 1 and ['x'] in monomial and len(monomial) > 1:
             monomial[0].insert(0, str(1))
         return monomial
 
