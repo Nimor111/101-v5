@@ -46,14 +46,24 @@ def get_best_guy():
             lang_list = [x for x in lang_list if x != []]
         dst_list.append(get_max_level_person(lang_list))
     idx = 0
-    # cpp_list[:] = map(lambda x: x if x != [] else None, cpp_list)
+    result = {}
     for lang in LANGUAGES:
-        print(lang, " - ", dst_list[idx])
+        result[lang] = dst_list[idx]
         idx += 1
+
+    return result
+
+
+def beautiful():
+    res = ""
+    for key, value in get_best_guy().items():
+        res += "{0} - {1}\n".format(key, value)
+
+    return res
 
 
 def main():
-    print(get_best_guy())
+    print(beautiful())
 
 
 if __name__ == '__main__':

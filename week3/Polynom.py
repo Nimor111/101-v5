@@ -2,7 +2,7 @@ from sys import argv
 import re
 from functools import reduce
 
-
+# TODO FIX THIS SHIT
 # for future stuff
 SYMBOLS = [" + ", " - "]
 
@@ -14,7 +14,6 @@ class Polynomial:
 
     def construct_polynom(self):
         monomials = self.parser.parse_monomials()
-        # return monomials
         return [Monomial(el).deriv() for el in monomials]
 
     def to_string(self):
@@ -73,10 +72,11 @@ class Parser:
         self.string_to_parse = string_to_parse
 
     def parse_string(self):
-        return self.string_to_parse.split(' + ')
+        return self.string_to_parse.split('+')
 
     def parse_monomials(self):
         monomials = []
+        print(self.parse_string())
         for el in self.parse_string():
             monomials.append(self.convert_to_monomial(el))
         return monomials
@@ -102,16 +102,15 @@ class Parser:
 def main():
     parser = Parser(argv[1])
     # print(parser.parse_string())
-    # print(parser.parse_monomials())
+    print(parser.parse_monomials())
     # m = Monomial(parser.convert_to_monomial())
     # print(m)
     # m = Monomial(parser.return_monomial(1))
     # print(m)
     # print(m.deriv())
-    # print([reduce(lambda x, y: x * y, [32, 3])])
     poly = Polynomial(parser)
     # print(poly.construct_polynom())
-    # print(poly.to_string())
+    print(poly.to_string())
     print(poly)
 
 

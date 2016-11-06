@@ -1,14 +1,6 @@
 from Tasks import simplify_fraction
 
 
-def smallest_denom(a, b):
-    if a % b == 0:
-        return a
-    elif b % a == 0:
-        return b
-    return a * b
-
-
 class Fraction:
 
     def __init__(self, numerator, denominator):
@@ -34,8 +26,15 @@ class Fraction:
             return frac[0]
         return Fraction(frac[0], frac[1])
 
+    def smallest_denom(self, a, b):
+        if a % b == 0:
+            return a
+        elif b % a == 0:
+            return b
+        return a * b
+
     def __add__(self, other):
-        add = smallest_denom(self.denominator, other.denominator)
+        add = self.smallest_denom(self.denominator, other.denominator)
         frac = simplify_fraction((add // self.denominator * self.numerator +
                                  add // other.denominator * other.numerator,
                                  add))
@@ -46,7 +45,7 @@ class Fraction:
         return Fraction(frac[0], frac[1])
 
     def __sub__(self, other):
-        sub = smallest_denom(self.denominator, other.denominator)
+        sub = self.smallest_denom(self.denominator, other.denominator)
         frac = simplify_fraction((sub // self.denominator * self.numerator -
                                  sub // other.denominator * other.numerator,
                                  sub))

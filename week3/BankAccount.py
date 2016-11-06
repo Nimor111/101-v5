@@ -11,8 +11,10 @@ class BankAccount:
     def deposit(self, amount):
         if amount < 0:
             raise ValueError("Amount must be positive!")
+            return False
         self.balance += amount
         self.history.append('Deposited {}{}'.format(amount, self.currency))
+        return True
 
     def balance_check(self):
         self.history.append('Balance check -> {}{}'
