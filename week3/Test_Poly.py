@@ -16,6 +16,12 @@ class TestPolynom(unittest.TestCase):
     def test_polynom_solve(self):
         self.assertEqual(self.polynom.solve(), [[16, 3], [1, 0]])
 
+    def test_polynom_beautiful(self):
+        self.assertEqual(self.polynom.beautiful(), '16*x^3 + 1')
+
+    def test_polynom_str(self):
+        self.assertEqual(self.polynom.__str__(), '16*x^3 + 1')
+
 
 if __name__ == '__main__':
     unittest.main()

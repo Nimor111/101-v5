@@ -3,6 +3,12 @@ class Polynom:
     def __init__(self, polynom):
         self.polynom = polynom.split('+')
 
+    def __str__(self):
+        return self.beautiful()
+
+    def __repr__(self):
+        return self.__str__()
+
     def combine(self, polynom):
         new_polynom = {}
         for el in polynom:
@@ -38,14 +44,24 @@ class Polynom:
         return sorted(res)[::-1]
 
     def beautiful(self):
-        pass
+        res = ""
+        for sublist in self.solve():
+            if sublist[0] == 1 and sublist[1] == 1:
+                res += "x + "
+            elif sublist[1] == 0:
+                res += "{}".format(sublist[0])
+            elif sublist[1] == 1:
+                res += "{}*x + ".format(sublist[0])
+            else:
+                res += "{}*x^{} + ".format(sublist[0], sublist[1])
+        return res.strip(" + ")
 
 
 def main():
-    polynom = Polynom("5x^4+10x^3")
-    # print(polynom.combine())
-    print(polynom.split_x())
-    print(polynom.solve())
+    polynom = Polynom("3x^4+x^4+x+7")
+    # print(polynom.split_x())
+    # print(polynom.solve())
+    print(polynom)
 
 
 if __name__ == "__main__":

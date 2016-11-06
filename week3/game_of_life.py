@@ -5,6 +5,7 @@ import time
 ALIVE = '■'
 DEAD = '□'
 
+
 number_of_cells = int(input("Insert number_of_cells: "))
 game_matrix = [[DEAD for i in range(9)] for j in range(9)]
 for i in range(number_of_cells):
