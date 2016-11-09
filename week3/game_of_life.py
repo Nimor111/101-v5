@@ -37,11 +37,18 @@ def check_neighbours(x, y):
         if live_cells == 0 or live_cells == 1 or live_cells >= 4:
             game_matrix[x][y] = DEAD
 
+    return game_matrix
 
-while True:
-    for x in range(number_of_cells):
-        for y in range(number_of_cells):
-            check_neighbours(x, y)
-    time.sleep(2)
-    os.system('clear')
-    print(np.matrix(game_matrix))
+
+def main():
+    while True:
+        for x in range(number_of_cells):
+            for y in range(number_of_cells):
+                check_neighbours(x, y)
+        time.sleep(2)
+        os.system('clear')
+        print(np.matrix(game_matrix))
+
+
+if __name__ == '__main__':
+    main()
