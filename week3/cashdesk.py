@@ -9,7 +9,7 @@ class Bill:
         self.amount = amount
 
     def __str__(self):
-        return "A {0}$ bill ".format(self.amount)
+        return "A {0}$ bill".format(self.amount)
 
     def __repr__(self):
         return self.__str__()
@@ -67,9 +67,10 @@ class CashDesk:
         return total
 
     def inspect(self):
-        print("We have a total of {0}$ in the desk".format(self.total()))
-        print('''We have the following amount of bills,
-sorted in ascending order:''')
+        res = ""
+        res += "We have a total of {0}$ in the desk".format(self.total())
+        res += '''We have the following amount of bills,
+sorted in ascending order:'''
         money_holder = {}
         for bill in self.bills:
             if bill not in money_holder.keys():
@@ -78,4 +79,6 @@ sorted in ascending order:''')
                 money_holder[bill] += 1
         money_holder_keys = sorted(bill.amount for bill in money_holder.keys())
         for el in money_holder_keys:
-            print("{0}$ bills - {1}".format(el, money_holder[Bill(el)]))
+            res += "\n{0}$ bills - {1}".format(el, money_holder[Bill(el)])
+
+        return res
