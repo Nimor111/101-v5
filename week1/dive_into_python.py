@@ -10,10 +10,10 @@ def count_substrings2(haystack, needle):
     return len([i for i in haystack.split(needle) if i.strip == ''])
 
 
-print(count_substrings("This is a test string", "is"))
-print(count_substrings("babababa", "baba"))
-print(count_substrings("Python is an awesome language to program in!", "o"))
-print(count_substrings("We have nothing in common!", "really?"))
+# print(count_substrings("This is a test string", "is"))
+# print(count_substrings("babababa", "baba"))
+# print(count_substrings("Python is an awesome language to program in!", "o"))
+# print(count_substrings("We have nothing in common!", "really?"))
 
 
 def sum_matrix(m):
@@ -29,23 +29,25 @@ def sum_matrix_2(m):
 
 
 m = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-print(sum_matrix(m))
-print(sum_matrix_2(m))
+# print(sum_matrix(m))
+# print(sum_matrix_2(m))
+
+
+def nan_expand_2(n):
+    if n == 0:
+        return ""
+    if n == 1:
+        return "Not a NaN"
+    return "Not a" + nan_expand(n - 1)
 
 
 def nan_expand(n):
     if n == 0:
         return ""
-    if n == 1:
-        return " Not a NaN"
-    return " Not a" + nan_expand(n - 1)
-
-
-def nan_expand_2(n):
     return "Not a " * n + "NaN"
 
 
-print(nan_expand_2(3))
+# print(nan_expand_2(3))
 
 
 def is_prime(n):
@@ -59,9 +61,9 @@ def is_prime(n):
     return True
 
 
-# print(is_prime(5))
-# print(is_prime(6))
-# print(is_prime(11))
+# # print(is_prime(5))
+# # print(is_prime(6))
+# # print(is_prime(11))
 
 
 def prime_factorization(n):
@@ -82,10 +84,10 @@ def prime_factorization(n):
                 flag = False
                 break
 
-    return [(k, v) for k, v in fact_dict.items()]
+    return [(k, v) for k, v in sorted(fact_dict.items())]
 
 
-print(prime_factorization(356))
+# print(prime_factorization(356))
 
 
 # group([1, 1, 1, 2, 3, 1, 1]) == [[1, 1, 1], [2], [3], [1, 1]]
@@ -108,7 +110,7 @@ def group(listy):
     return res_list
 
 
-print(group([1, 2, 1, 2, 3, 3]))
+# print(group([1, 2, 1, 2, 3, 3]))
 
 
 def max_consecutive(items):
@@ -120,8 +122,8 @@ def max_consecutive(items):
     return max(max_cons_values)
 
 
-print(max_consecutive([1, 2, 3, 3, 3, 3, 4, 3, 3]))
-print(max_consecutive([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5]))
+# print(max_consecutive([1, 2, 3, 3, 3, 3, 4, 3, 3]))
+# print(max_consecutive([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5]))
 
 
 def word_counter():
@@ -172,4 +174,4 @@ def word_counter():
         return counter
 
 
-print(word_counter())
+# print(word_counter())

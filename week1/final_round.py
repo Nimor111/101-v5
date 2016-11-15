@@ -14,9 +14,9 @@ def is_number_balanced(n):
 
 
 # Mine test, my own, my precious
-print(is_number_balanced(121))
-print(is_number_balanced(4518))
-print(is_number_balanced(1238033))
+# print(is_number_balanced(121))
+# print(is_number_balanced(4518))
+# print(is_number_balanced(1238033))
 
 
 def increasing_or_decreasing(seq):
@@ -36,37 +36,37 @@ def increasing_or_decreasing(seq):
     if flag_DOWN:
         return "Down!"
     elif flag_UP:
-        return "UP!"
+        return "Up!"
     else:
-        return "False"
+        return False
 
 
-print(increasing_or_decreasing([1, 2, 3, 4, 5]))
-print(increasing_or_decreasing([5, 6, -10]))
-print(increasing_or_decreasing([1, 1, 1, 1]))
-print(increasing_or_decreasing([9, 8, 7, 6]))
+# print(increasing_or_decreasing([1, 2, 3, 4, 5]))
+# print(increasing_or_decreasing([5, 6, -10]))
+# print(increasing_or_decreasing([1, 1, 1, 1]))
+# print(increasing_or_decreasing([9, 8, 7, 6]))
 
 
 def get_largest_palindrome(n):
     # return max([i for i in range(n) if str(i) == str(i)[::-1]])
-    for el in range(n, -1, -1):
+    for el in range(n - 1, -1, -1):
         if str(el) == str(el)[::-1]:
             return el
 
 
-print(get_largest_palindrome(99))
-print(get_largest_palindrome(252))
-print(get_largest_palindrome(994687))
-print(get_largest_palindrome(754649))
+# print(get_largest_palindrome(99))
+# print(get_largest_palindrome(252))
+# print(get_largest_palindrome(994687))
+# print(get_largest_palindrome(754649))
 
 
 def sum_of_numbers(st):
     return sum([int(i) for i in re.findall('(\d+)', st)])
 
 
-print(sum_of_numbers("ab125cd3"))
-print(sum_of_numbers("ab12"))
-print(sum_of_numbers("ab"))
+# print(sum_of_numbers("ab125cd3"))
+# print(sum_of_numbers("ab12"))
+# print(sum_of_numbers("ab"))
 
 
 def birthday_ranges(birthdays, ranges):
@@ -78,8 +78,8 @@ def birthday_ranges(birthdays, ranges):
     return res
 
 
-print(birthday_ranges([1, 2, 3, 4, 5], [(1, 2), (1, 3),
-                      (1, 4), (1, 5), (4, 6)]))
+# print(birthday_ranges([1, 2, 3, 4, 5], [(1, 2), (1, 3),
+#(1, 4), (1, 5), (4, 6)]))
 
 
 def numbers_to_message(pressed_sequence):
@@ -91,7 +91,7 @@ def numbers_to_message(pressed_sequence):
                 4: ['g', 'h', 'i'],
                 5: ['j', 'k', 'l'],
                 6: ['m', 'n', 'o'],
-                7: ['p', 'q', 'r', 's'],
+                7: ['q', 'p', 'r', 's'],
                 8: ['t', 'u', 'v'],
                 9: ['w', 'x', 'y', 'z']}
 
@@ -106,7 +106,7 @@ def numbers_to_message(pressed_sequence):
         # if clicked more than three times start over
         # -4 because list indexes start from 0
         if el[1] > 3:
-            el[1] = el[1] - 4
+            el[1] = el[1] - 3
         # space if 0 in list
         if el[1] == 0:
             result += keyboard[0]
@@ -121,10 +121,10 @@ def numbers_to_message(pressed_sequence):
 
 
 # "abc"
-print(numbers_to_message([2, -1, 2, 2, -1, 2, 2, 2]))
+# print(numbers_to_message([2, -1, 2, 2, -1, 2, 2, 2]))
 # "Ivo e Panda"
-print(numbers_to_message([1, 4, 4, 4, 8, 8, 8, 6, 6, 6, 0, 3, 3, 0, 1,
-                          7, 7, 7, 7, 7, 2, 6, 6, 3, 2]))
+# print(numbers_to_message([1, 4, 4, 4, 8, 8, 8, 6, 6, 6, 0, 3, 3, 0, 1,
+                          #7, 7, 7, 7, 7, 2, 6, 6, 3, 2]))
 
 
 def message_to_numbers(message):
@@ -158,7 +158,7 @@ def message_to_numbers(message):
     return res_list
 
 
-print(message_to_numbers("abc"))
-print(message_to_numbers("a"))
-print(message_to_numbers("Ivo e Panda"))
-print(message_to_numbers("aabbcc"))
+# print(message_to_numbers("abc"))
+# print(message_to_numbers("a"))
+# print(message_to_numbers("Ivo e Panda"))
+# print(message_to_numbers("aabbcc"))

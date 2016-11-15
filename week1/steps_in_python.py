@@ -8,7 +8,7 @@ def sum_of_digits(number):
     return sum
 
 
-print(sum_of_digits(555))
+# print(sum_of_digits(555))
 
 
 # Create list with the digits of a number
@@ -19,10 +19,10 @@ def to_digits(number):
         list.append(number % 10)
         number //= 10
 
-    return list
+    return list[::-1]
 
 
-print(to_digits(555))
+# print(to_digits(555))
 
 
 # Create number from array
@@ -34,13 +34,13 @@ def to_number(digits):
     return int(string)
 
 
-print(to_number([5, 5, 5]))
+# print(to_number([5, 5, 5]))
 
 # Count the vowels in a string
 
 
 def count_vowels(string):
-    vowels = ['a', 'e', 'i', 'o', 'u']
+    vowels = ['a', 'e', 'i', 'o', 'u', 'y']
     counter = 0
     for letter in string.lower():
         if letter in vowels:
@@ -49,21 +49,22 @@ def count_vowels(string):
     return counter
 
 
-print(count_vowels("AhIOU"))
+# print(count_vowels("AhIOU"))
 
 
 # Count the consonants in a string
 def count_consonants(string):
-    vowels = ['a', 'e', 'i', 'o', 'u']
+    vowels = ['a', 'e', 'i', 'o', 'u', 'y']
     counter = 0
+    print(string)
     for letter in string.lower():
-        if letter not in vowels:
+        if letter not in vowels and letter.isalpha():
             counter += 1
 
     return counter
 
 
-print(count_consonants("Beginning"))
+# print(count_consonants("Beginning"))
 # Check if a given number is prime
 
 
@@ -77,12 +78,12 @@ def prime_number(number):
     return True
 
 
-print(prime_number(16))
-print(prime_number(5))
-print(prime_number(4))
-print(prime_number(3))
-print(prime_number(10))
-print(prime_number(7))
+# print(prime_number(16))
+# print(prime_number(5))
+# print(prime_number(4))
+# print(prime_number(3))
+# print(prime_number(10))
+# print(prime_number(7))
 
 # Sum of the factorials of the digits in the number
 
@@ -104,12 +105,12 @@ def fact_digits(n):
     return sum_of_facts
 
 
-print(fact_digits(555))
+# print(fact_digits(555))
 
 # fibonacci sequence
 
 
-def fibonacci(number):
+def fibonacci_list(number):
     prev = 1
     curr = 1
 
@@ -121,26 +122,26 @@ def fibonacci(number):
     return curr
 
 
-print(fibonacci(3))
-print(fibonacci(4))
-print(fibonacci(5))
-print(fibonacci(6))
-print(fibonacci(7))
+# print(fibonacci(3))
+# print(fibonacci(4))
+# print(fibonacci(5))
+# print(fibonacci(6))
+# print(fibonacci(7))
 
 # First nth members of Fibonacci
 
 
-def fibonacci_list(n):
+def fibonacci(n):
     fib_list = []
     for num in range(1, n + 1):
-        fib_list.append(fibonacci(num))
+        fib_list.append(fibonacci_list(num))
     return fib_list
 
 
-print(fibonacci_list(1))
-print(fibonacci_list(2))
-print(fibonacci_list(3))
-print(fibonacci_list(10))
+# print(fibonacci_list(1))
+# print(fibonacci_list(2))
+# print(fibonacci_list(3))
+# print(fibonacci_list(10))
 
 # Concatenates first n fibonacci numbers
 
@@ -152,18 +153,18 @@ def fib_number(n):
     return result
 
 
-print(fib_number(3))
-print(fib_number(10))
+# print(fib_number(3))
+# print(fib_number(10))
 
 # Check if a given string is palindrome
 
 
 def palindrome(string):
-    return string == string[::-1]  # stack overflow rules
+    return str(string) == str(string)[::-1]  # stack overflow rules
     # string[::-1] reverses a string
 
 
-print(palindrome("1001001"))
+# print(palindrome("1001001"))
 
 # Dictionary with all characters from a string
 
@@ -179,5 +180,11 @@ def char_histogram(string):
     return chars_and_occurences
 
 
-print(char_histogram("Python!"))
-print(char_histogram("Alabala"))
+# print(char_histogram("Python!"))
+# print(char_histogram("Alabala"))
+# def main():
+#     print(count_consonants("grrrrh!"))
+
+
+# if __name__ == "__main__":
+#     main()
