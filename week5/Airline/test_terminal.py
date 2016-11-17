@@ -1,6 +1,6 @@
 import unittest
 from terminal import Terminal
-from flight import Flight
+from flight import Flight, Passenger, Reservation
 from date import Date
 
 
@@ -84,6 +84,37 @@ class TestTerminal(unittest.TestCase):
         date = Date()
         self.assertEqual(self.terminal.flights_on_date_lt_hours(date, hours),
                          [self.flight])
+
+    def test_flights_within_duration(self):
+        start_time = Date(day=29, month=11, year=2016, hour='17:30')
+        end_time = Date(day=29, month=11, year=2016, hour='20:40')
+        self.assertEqual(self.terminal.flights_within_duration(start_time,
+                                                               end_time),
+                         [self.flight2])
+
+    def test_passengers_to_dest(self):
+        destination = self.flight.to_dest
+        passenger = Passenger(first_name="Georgi", second_name="Atanasov",
+                              age=20, flight=self.flight)
+        passenger2 = Passenger(flight=self.flight2)
+        self.flight.add_passenger(passenger)
+        self.flight2.add_passenger(passenger2)
+        self.assertEqual(self.terminal.passengers_to_dest(destination),
+                         [passenger])
+
+    def test_flights_with_passengers_gt(self):
+        size = 0
+        passenger = Passenger(first_name="Georgi", second_name="Atanasov",
+                              age=20, flight=self.flight)
+        passenger2 = Passenger(flight=self.flight2)
+        self.flight.add_passenger(passenger)
+        self.flight2.add_passenger(passenger2)
+        self.assertEqual(self.terminal.flights_with_passengers_gt(size),
+                         [self.flight, self.flight2])
+
+    def test_reservations_to_destination(destination):
+        destination = "London"
+        pass
 
 
 if __name__ == '__main__':

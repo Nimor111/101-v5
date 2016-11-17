@@ -1,7 +1,7 @@
 import unittest
 from airport import Airport
 from date import Date
-from flight import Flight
+from flight import Flight, Passenger
 from terminal import Terminal
 
 
@@ -23,6 +23,18 @@ class TestAirport(unittest.TestCase):
     def test_add_terminal(self):
         self.assertEqual(self.airport.add_terminal(self.terminal),
                          [self.terminal, self.terminal])
+
+    def test_passengers_from_terminal(self):
+        passenger = Passenger(first_name="Georgi", second_name="Atanasov",
+                              age=20, flight=self.flight)
+        passenger2 = Passenger(flight=self.flight2)
+        self.flight.add_passenger(passenger)
+        self.flight2.add_passenger(passenger2)
+        self.terminal.add_flight(self.flight)
+        self.terminal.add_flight(self.flight2)
+        self.assertEqual(self.airport.passengers_from_terminal(
+            self.terminal),
+            [passenger, passenger2])
 
 
 if __name__ == "__main__":

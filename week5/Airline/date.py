@@ -9,6 +9,12 @@ class Date:
     def __lt__(self, other):
         return self.hour < other.hour
 
+    def __le__(self, other):
+        return self.hour <= other.hour
+
+    def __ge__(self, other):
+        return self.hour >= other.hour
+
     def __str__(self):
         return "{}/{}/{}".format(self.day, self.month, self.year)
 

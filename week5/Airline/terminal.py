@@ -55,6 +55,22 @@ class Terminal:
         return [el for el in self.flights if el.start_time == date and
                 el.flight_duration() < hours]
 
+    def flights_within_duration(self, start_time, end_time):
+        return [el for el in self.flights if el.start_time >= start_time and
+                el.end_time <= end_time]
+
+    def passengers_to_dest(self, destination):
+        passengers = []
+        for flight in self.flights:
+            if flight.to_dest == destination:
+                for passenger in flight.psgrs:
+                    passengers.append(passenger)
+
+        return passengers
+
+    def flights_with_passengers_gt(self, size):
+        return [flight for flight in self.flights if flight.passengers > 0]
+
 
 def main():
     pass
