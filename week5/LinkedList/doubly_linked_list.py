@@ -1,8 +1,9 @@
 class Node:
 
-    def __init__(self, value=None, link=None):
+    def __init__(self, value=None, prev=None, nexty=None):
         self.value = value
-        self.next = link
+        self.next = nexty
+        self.prev = prev
 
 
 class LinkedList:
@@ -14,6 +15,7 @@ class LinkedList:
         if self.head is None:
             self.head = self.tail = Node(data)
         else:
+            self.tail.prev = self.tail
             self.tail.next = Node(data)
             self.tail = self.tail.next
         self.length += 1
