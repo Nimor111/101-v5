@@ -1,5 +1,5 @@
 # binary sort in python3
-# author - Georgi Bojinov
+# author - Georgi Bojinov, Hack Bulgaria - binary search implementation
 
 def binary_search(xs, start, end, x):
     if x not in xs or x == []:
