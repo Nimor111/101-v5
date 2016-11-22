@@ -130,13 +130,9 @@ class Tree:
     """
 
 
-tree = Tree(5)
-tree.add_child(5, 4)
-tree.add_child(4, 3)
-tree.add_child(5, 6)
-tree.add_child(4, 2)
-print(tree.find(4))
-print(tree.nodes)
-print(tree.height())
-print(tree.tree_levels())
-# print(tree.get_height_node(Tree.find_child(tree.root, 3)))
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()
