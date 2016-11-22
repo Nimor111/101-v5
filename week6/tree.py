@@ -118,7 +118,7 @@ class Tree:
     def count_nodes(self):
         return self.nodes
     """
-        Returns the number of node sin the tree
+        Returns the number of nodes in the tree
         In our example -> tree.count_nodes() = 4
     """
 
