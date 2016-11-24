@@ -23,10 +23,10 @@ class Queue:
     def dequeue(self):
         if self.empty():
             raise IndexError("Queue is empty!")
-        value_ = self.head.value
+        value = self.head.value
         self.head = self.head.next
         self.size -= 1
-        return value_
+        return value
 
     def empty(self):
         return self.head is None
@@ -39,7 +39,9 @@ class Queue:
         return "->".join(vals)
 
 
-queue = Queue()
-queue.enqueue(5)
-print(queue.pprint())
-# print(queue.dequeue())
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()

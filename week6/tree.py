@@ -60,47 +60,37 @@ class Tree:
         return False
 
     def find(self, x):
-        if Tree.find_child(self.root, x):
-            return True
-        return False
+        return bool(Tree.find_child(self.root, x))
     """
         Returns True or False if Node with value x is present in the tree
     """
-    def get_height_node(self, node):
-        if node == self.root.value:
-            return 0
-        if node.is_leaf() is False:
-            return 1
-        for child in node.children:
-            return 1 + self.get_height_node(child)
 
     def BFS(self):  # implements BFS with queue yay
-        counter = 0
         splicer = '|'
         queue = Queue()
-        list_of_children = []
-        temp_list = []
+        level_count = 0
+        levels = {level_count: [self.root.value]}
         if self.root:
             queue.enqueue(self.root)
-            list_of_children.append([self.root.value])
         else:
             raise "Empty tree!"
         queue.enqueue(splicer)
+        level_count += 1
+        levels[level_count] = []
         while not queue.empty():
             value = queue.dequeue()
             if value == splicer:
-                if temp_list != []:
-                    list_of_children.append(temp_list)
-                temp_list = []
-                counter += 1
                 if queue.empty():
-                    return (counter - 1, list_of_children)
+                    levels.pop(len(levels.keys()) - 1)
+                    return (len(levels.keys()) - 1, levels)
                 else:
+                    level_count += 1
+                    levels[level_count] = []
                     queue.enqueue(splicer)
             else:
                 for child in value.children:
                     queue.enqueue(child)
-                    temp_list.append(child.value)
+                    levels[level_count].append(child.value)
 
     def height(self):
         return self.BFS()[0]
@@ -123,7 +113,7 @@ class Tree:
     """
 
     def tree_levels(self):
-        return self.BFS()[1]
+        return list(self.BFS()[1].values())
     """
         Returns a list of lists with the nodes foe each level1
         tree.tree_levels = [[5], [4, 3], [2]]

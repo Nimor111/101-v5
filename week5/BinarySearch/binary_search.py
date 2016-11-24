@@ -14,21 +14,43 @@ def binary_search(xs, start, end, x):
         return binary_search(xs, mid + 1, end, x)
 
 
-def turning_point(xs, start, end):
+def find_turning_point(xs, start, end):
+
     middle = (start + end) // 2
     left = middle - 1
+    right = middle + 1
 
     if end - start < 2:
+        if xs[end] < xs[end - 1]:
+            return "Turning point is {} on index {}.".format(xs[end], end)
         return False
 
+    if xs[left] > xs[middle]:
+        return "Turning point is {} on index {}." \
+            .format(xs[middle], middle)
+
     if xs[left] < xs[middle]:
-        in_left = turning_point(xs, start, middle)
-        if in_left is False:
-            return turning_point(xs, middle + 1, end)
-        else:
+        in_left = find_turning_point(xs, start, middle)
+        if in_left:
             return in_left
-    else:
-        return middle
+        elif xs[middle] > xs[right]:
+            if middle == end - 1:
+                return "Turning point is {} on index {}." \
+                    .format(xs[middle + 1], middle + 1)
+            return "Turning point is {} on index {}." \
+                .format(xs[middle], middle)
+        else:
+            return find_turning_point(xs, right, end)
+
+        # else:
+        #     in_left = find_turning_point(xs, start, middle)
+        #     print("INLEFT IS FUCKING: ", in_left)
+        #     if in_left:
+        #         print("returning in left")
+        #         return in_left
+        #     else:
+        #         print("Ever get here?")
+        #         return find_turning_point(xs, right, end)
 
 
 def main():
