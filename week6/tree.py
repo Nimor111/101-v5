@@ -1,4 +1,5 @@
 from queue import Queue
+from stack import Stack
 
 
 class TreeNode:
@@ -91,6 +92,18 @@ class Tree:
                 for child in value.children:
                     queue.enqueue(child)
                     levels[level_count].append(child.value)
+
+    def DFS(self, node):
+        stack = Stack()
+        stack.push(node)
+        res = []
+        while stack.empty() is False:
+            curr = stack.pop()
+            res.append(curr.value)
+
+            for child in curr.children:
+                stack.push(child)
+        return res
 
     def height(self):
         return self.BFS()[0]
