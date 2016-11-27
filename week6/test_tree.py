@@ -32,8 +32,11 @@ class TestTree(unittest.TestCase):
 
     def test_DFS(self):
         self.tree.add_child(5, 4)
+        self.tree.add_child(5, 7)
+        self.tree.add_child(7, 8)
         self.tree.add_child(4, 3)
-        self.assertEqual(self.tree.DFS(self.tree.root), [5, 4, 3])
+        self.tree.add_child(4, 6)
+        self.assertEqual(self.tree.DFS(self.tree.root), [5, 7, 8, 4, 6, 3])
 
 
 if __name__ == '__main__':
