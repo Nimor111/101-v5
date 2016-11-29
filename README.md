@@ -1,3 +1,3 @@
 # 101-v5
 
-Repo for holding my tasks from the 101 course
+Repository for holding tasks for the Hack Bulgaria Programming 101 with Python course that i'm taking - 2016/2017.
