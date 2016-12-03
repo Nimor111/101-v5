@@ -29,14 +29,16 @@ class Panda:
     def __str__(self):
         return '{}:{}:{}'.format(self.name, self.email, self.gender)
 
+    def __repr__(self):
+        return self.__str__()
+
     def __eq__(self, other):
         return self.name == other.name and \
             self.gender == other.gender and \
             self.email == other.email
 
     def __hash__(self):
-        return hash(self.name) + hash(self.gender) + \
-            hash(self.email)
+        return hash(self.email)
 
     def name(self):
         return self.name

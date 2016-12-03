@@ -1,5 +1,7 @@
+import json
 from panda import Panda
 from panda_already_there import PandaAlreadyThereError
+from collections import deque
 
 
 class PandaSocialNetwork:
@@ -7,22 +9,59 @@ class PandaSocialNetwork:
     def __init__(self):
         self.social_network = {}
 
+    def get_pandas(self):
+        return list(self.social_network.keys())
+
     def add_panda(self, panda):
-        if panda in self.social_network:
-            raise PandaAlreadyThereError('Panda is already in the network!')
-        self.social_network[panda] = []
+        if self.has_panda(panda):
+            return
+        self.social_network[panda] = set()
         return self.social_network
 
     def has_panda(self, panda):
-        return bool(panda in self.social_network)
+        return panda in self.social_network
 
     def make_friends(self, panda1, panda2):
-        pass
+        self.add_panda(panda1)
+        self.add_panda(panda2)
 
+        self.social_network[panda1].add(panda2)
+        self.social_network[panda2].add(panda1)
+        return self.social_network
 
-panda = Panda('Ivo', 'georgi.bojinov@hotmail.com', 'male')
-panda2 = Panda('Iva', 'georgina.bozhinov@hotmail.com', 'female')
+    def are_friends(self, panda1, panda2):
+        check1 = panda1 in self.social_network[panda2]
+        check2 = panda2 in self.social_network[panda1]
 
-psn = PandaSocialNetwork()
-psn.add_panda(panda)
-psn.add_panda(panda)
+        if check1 and not check2 or check2 and not check1:
+            raise AssertionError('Something\'s wrong with the graph')
+
+        return check1 and check2
+
+    def connection_level(self, start, target):  # bfs
+        q = deque()
+        visited = set()
+        paths = {start: None}
+
+        q.append((0, start))
+        visited.add(start)
+
+        while q:
+            level, current = q.popleft()
+
+            if current == target:
+                path = []
+
+                while target is not None:
+                    path.append(target)
+                    target = paths[target]
+
+                return (level, list(reversed(path)))
+                # path = {str(key): str(value) for key, value in path.items()}
+                # print(json.dumps(path, indent=4))
+
+            for neigh in self.social_network[current]:
+                if neigh not in visited:
+                    q.append((level + 1, neigh))
+                    visited.add(neigh)
+                    paths[neigh] = current
