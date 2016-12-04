@@ -38,6 +38,11 @@ class PandaSocialNetwork:
 
         return check1 and check2
 
+    def friends_of(self, panda):
+        if panda not in self.social_network:
+            return False
+        return self.social_network[panda]
+
     def connection_level(self, start, target):  # bfs
         q = deque()
         visited = set()
@@ -65,3 +70,43 @@ class PandaSocialNetwork:
                     q.append((level + 1, neigh))
                     visited.add(neigh)
                     paths[neigh] = current
+
+    def are_connected(self, panda1, panda2):
+        return self.connection_level(panda1, panda2) is not None
+
+    def bfs(self, panda, t_level):
+        queue = deque()
+        visited = set()
+
+        queue.append((0, panda))
+        visited.add(panda)
+
+        while queue:
+            level, current = queue.popleft()
+
+            if level == t_level:
+                print("Found it")
+                nodes = [current]
+
+                for elem in queue:
+                    nodes.append(elem[1])
+
+                return nodes
+
+            for neigh in self.social_network[current]:
+                if neigh not in visited:
+                    queue.append((level + 1, neigh))
+                    visited.add(neigh)
+
+    def how_many_gender_in_network(self, level, panda, gender):
+        return sum([1 for child in self.bfs(panda, level) if child.gender ==
+                    gender])
+
+
+panda = Panda('name', '1@hb.com', 'male')
+panda2 = Panda('name', '2@hb.com', 'male')
+panda3 = Panda('name', '3@hb.com', 'male')
+sn = PandaSocialNetwork()
+sn.make_friends(panda, panda2)
+sn.make_friends(panda, panda3)
+print(sn.bfs(panda, 1))
