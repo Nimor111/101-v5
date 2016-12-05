@@ -1,4 +1,3 @@
-import json
 from panda import Panda
 from panda_already_there import PandaAlreadyThereError
 from collections import deque
@@ -60,8 +59,8 @@ class PandaSocialNetwork:
                 while target is not None:
                     path.append(target)
                     target = paths[target]
-
-                return (level, list(reversed(path)))
+                # list(reversed(path)))
+                return level
                 # path = {str(key): str(value) for key, value in path.items()}
                 # print(json.dumps(path, indent=4))
 
@@ -71,8 +70,10 @@ class PandaSocialNetwork:
                     visited.add(neigh)
                     paths[neigh] = current
 
+        return -1
+
     def are_connected(self, panda1, panda2):
-        return self.connection_level(panda1, panda2) is not None
+        return self.connection_level(panda1, panda2) != -1
 
     def bfs(self, panda, t_level):
         queue = deque()
@@ -85,7 +86,6 @@ class PandaSocialNetwork:
             level, current = queue.popleft()
 
             if level == t_level:
-                print("Found it")
                 nodes = [current]
 
                 for elem in queue:
@@ -98,15 +98,26 @@ class PandaSocialNetwork:
                     queue.append((level + 1, neigh))
                     visited.add(neigh)
 
+        return -1
+
     def how_many_gender_in_network(self, level, panda, gender):
-        return sum([1 for child in self.bfs(panda, level) if child.gender ==
-                    gender])
+        children = self.bfs(panda, level)
+        if children == -1:
+            return 0
+        genders = []
+        for child in children:
+            if child.gender() == gender:
+                genders.append(1)
+            else:
+                genders.append(0)
+
+        return sum(genders)
 
 
-panda = Panda('name', '1@hb.com', 'male')
-panda2 = Panda('name', '2@hb.com', 'male')
-panda3 = Panda('name', '3@hb.com', 'male')
-sn = PandaSocialNetwork()
-sn.make_friends(panda, panda2)
-sn.make_friends(panda, panda3)
-print(sn.bfs(panda, 1))
+# panda = Panda('name', '1@hb.com', 'male')
+# panda2 = Panda('name', '2@hb.com', 'male')
+# panda3 = Panda('name', '3@hb.com', 'male')
+# sn = PandaSocialNetwork()
+# sn.make_friends(panda, panda2)
+# sn.make_friends(panda, panda3)
+# print(sn.bfs(panda, 1))

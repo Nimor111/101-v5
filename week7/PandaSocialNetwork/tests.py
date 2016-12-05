@@ -7,6 +7,10 @@ class PandaSocialNetworkTests(unittest.TestCase):
     def setUp(self):
         self.panda_social_network = PandaSocialNetwork()
 
+    def test_panda_name_method_avoids_collision(self):
+        panda = Panda('name', '1@hb.com', 'male')
+        self.assertEqual(panda.name(), 'name')
+
     def test_get_pandas_return_1_panda_if_1_panda_is_added(self):
         panda = Panda('Pesho', 'pesho@hackbulgaria.com', 'male')
         self.panda_social_network.add_panda(panda)
@@ -30,10 +34,10 @@ class PandaSocialNetworkTests(unittest.TestCase):
         self.panda_social_network.make_friends(panda2, panda3)
         self.panda_social_network.make_friends(panda3, panda4)
 
-        level, path = self.panda_social_network. \
+        level = self.panda_social_network. \
             connection_level(panda1, panda4)
         self.assertEqual(3, level)
-        self.assertEqual([panda1, panda2, panda3, panda4], list(path))
+        # self.assertEqual([panda1, panda2, panda3, panda4], list(path))
 
     def test_connection_level_for_two_pandas_who_are_not_connected(self):
         panda1 = Panda('name', '1@hb.com', 'male')
@@ -42,8 +46,8 @@ class PandaSocialNetworkTests(unittest.TestCase):
         self.panda_social_network.add_panda(panda1)
         self.panda_social_network.add_panda(panda2)
 
-        self.assertIsNone(self.panda_social_network.
-                          connection_level(panda1, panda2))
+        self.assertEqual(self.panda_social_network.
+                         connection_level(panda1, panda2), -1)
 
     def test_friends_of_panda_with_two_friends(self):
         panda1 = Panda('name', '1@hb.com', 'male')
