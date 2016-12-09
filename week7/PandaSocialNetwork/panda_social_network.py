@@ -13,7 +13,7 @@ class PandaSocialNetwork:
 
     def add_panda(self, panda):
         if self.has_panda(panda):
-            return
+            raise ValueError("Panda is in the network!")
         self.social_network[panda] = set()
         return self.social_network
 
@@ -21,8 +21,13 @@ class PandaSocialNetwork:
         return panda in self.social_network
 
     def make_friends(self, panda1, panda2):
-        self.add_panda(panda1)
-        self.add_panda(panda2)
+        # self.add_panda(panda1)
+        # self.add_panda(panda2)
+
+        if panda1 not in self.social_network:
+            self.social_network[panda1] = set()
+        if panda2 not in self.social_network:
+            self.social_network[panda2] = set()
 
         self.social_network[panda1].add(panda2)
         self.social_network[panda2].add(panda1)

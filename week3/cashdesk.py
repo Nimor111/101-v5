@@ -69,7 +69,8 @@ class CashDesk:
     def inspect(self):
         res = ""
         res += "We have a total of {0}$ in the desk\n".format(self.total())
-        res += '''We have the following count of bills, sorted in ascending order:'''
+        res += '''We have the following count of bills, sorted
+        in ascending order:'''
         money_holder = {}
         for bill in self.bills:
             if bill not in money_holder.keys():

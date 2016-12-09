@@ -78,6 +78,13 @@ class PandaSocialNetworkTests(unittest.TestCase):
         self.assertEqual(self.panda_social_network.how_many_gender_in_network
                          (1, panda1, 'male'), 2)
 
+    def test_friends_of_panda_with_0_friends(self):
+        panda1 = Panda('name', '1@hb.com', 'male')
+        panda2 = Panda('name', '2@hb.com', 'male')
+        self.panda_social_network.add_panda(panda1)
+        self.assertEqual(self.panda_social_network.friends_of(panda1),
+                         set())
+
 
 if __name__ == '__main__':
     unittest.main()
