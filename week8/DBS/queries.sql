@@ -22,11 +22,11 @@ AND movie.studioname = "MGM";
 SELECT movieexec.name, movie.title
 FROM movieexec, movie
 WHERE movieexec.CERT = movie.producer
-AND movieexec.name = ( SELECT movieexec.name 
-					     FROM movieexec, movie
-					     WHERE movie.producer = movieexec.CERT
-					     AND movie.title = "Star Wars");
+AND movieexec.name = (SELECT movieexec.name 
+		       FROM movieexec, movie
+		       WHERE movie.producer = movieexec.CERT
+		       AND movie.title = "Star Wars");
 SELECT moviestar.name
 FROM moviestar
-WHERE moviestar.name NOT IN ( SELECT starsin.starname
-							  FROM starsin);
+WHERE moviestar.name NOT IN (SELECT starsin.starname
+			      FROM starsin);
