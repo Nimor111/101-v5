@@ -49,8 +49,8 @@ SELECT product.maker, AVG(pc.hd)
 FROM pc
 LEFT JOIN product ON product.model = pc.model
 WHERE product.maker IN ( SELECT product.maker
-					       FROM product
-					       JOIN printer ON product.model = printer.model)
+			 FROM product
+			 JOIN printer ON product.model = printer.model)
 GROUP BY product.maker;
 
 SELECT product.maker, AVG(pc.hd)
