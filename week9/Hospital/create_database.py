@@ -10,7 +10,7 @@ drop_db = """ DROP TABLE IF EXISTS PATIENT"""
 c.execute(drop_db)
 db.commit()
 
-create_patiens_table = """
+create_patients_table = """
 CREATE TABLE IF NOT EXISTS PATIENT
 (
   ID INTEGER PRIMARY KEY AUTOINCREMENT,
