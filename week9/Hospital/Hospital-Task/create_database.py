@@ -24,7 +24,7 @@ def create_hospital_stay_table():
       ID INTEGER PRIMARY KEY AUTOINCREMENT,
       ROOM INT NOT NULL,
       STARTDATE TEXT NOT NULL,
-      ENDDATE DATE,
+      ENDDATE TEXT,
       INJURY TEXT NOT NULL,
       PATIENT INT,
       FOREIGN KEY(PATIENT) REFERENCES PATIENTS(ID)
@@ -115,7 +115,7 @@ def create_database(name):
 
 
 def main():
-    pass  # create_database("hospital.db")
+    pass
 
 
 if __name__ == '__main__':
