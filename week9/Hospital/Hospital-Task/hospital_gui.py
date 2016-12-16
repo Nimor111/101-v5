@@ -211,7 +211,6 @@ class HospitalAPI:
 
         for row in result:
             print(row['patients'])
-            # ('GROUP_CONCAT(patient.firstname, patient.lastname)'))
 
     def all_doctor_patients(self):
         print("Which doctor's patients would you like to see?")
@@ -220,17 +219,59 @@ class HospitalAPI:
         self.__list_all_patients_doctor(doctor.split(' ')[0],
                                         doctor.split(' ')[1])
 
+    def __patients_by_injury(self, injury):
+        query = """
+        SELECT GROUP_CONCAT(patient.firstname || " " || patient.lastname) AS p
+        FROM hospital_stay
+        LEFT JOIN patient ON hospital_stay.patient = patient.id
+        WHERE hospital_stay.injury = ?
+        GROUP BY hospital_stay.injury
+        """
+        result = self.cursor.execute(query, (injury,))
+
+        for row in result:
+            print(row['p'])
+
+    def list_sick_patients_by_injury(self):
+        print("Patients with which sickness would you like to see?")
+        sickness = input()
+
+        self.__patients_by_injury(sickness)
+
+    def __patients_between_dates(self, startdate1, startdate2):
+        query = """
+        SELECT GROUP_CONCAT(patient.firstname || " " || patient.lastname) AS p
+        FROM patient
+        LEFT JOIN hospital_stay ON patient.id = hospital_stay.patient
+        WHERE hospital_stay.startdate >= ? AND hospital_stay.startdate <= ?
+        """
+        result = self.cursor.execute(query, (startdate1, startdate2))
+
+        for row in result:
+            print(row['p'])
+
+    def list_patients_between_dates(self):
+        print("Enter dates between which patients have entered the hospital:")
+        print("First date: (format: yyyy-mm-dd)")
+        date1 = input()
+        print("Second date:")
+        date2 = input()
+
+        self.__patients_between_dates(date1, date2)
+
 
 def main():
     hospital = HospitalAPI('hospital.db')
     # hospital.add_patient("Pesho", "Peshov", 12, 'M', 1)
     # hospital.add_doctor("Courtney", "Cake")
-    hospital.delete_patient()
+    # hospital.delete_patient()
     # hospital.update_doctor_information()
-    hospital.update_patient_information()
-    hospital.list_all_patients()
+    # hospital.update_patient_information()
+    # hospital.list_all_patients()
     # hospital.list_all_doctors()
     # hospital.all_doctor_patients()
+    # hospital.list_sick_patients_by_injury()
+    # hospital.list_patients_between_dates()
 
 
 if __name__ == '__main__':
