@@ -3,4 +3,6 @@ MusicPlayer/
 A
 B
 a.out
-venv
+# virtual envs 
+vHospital
+vHospitalManager
