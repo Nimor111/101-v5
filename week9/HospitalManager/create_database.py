@@ -4,6 +4,7 @@ import datetime
 from random import choice
 from settings import *
 from queries import *
+from users import User, Doctor
 
 
 db = sqlite3.connect(DB_NAME)
@@ -38,6 +39,27 @@ def insert_users():
              ("Kiril Ivanov", "kireto", 22),
              ("Dr. Georgi Georgiev", "doctora", 50)]
     c.executemany(INSERT_INTO_USER, users)
+    db.commit()
+
+
+def insert_user(user):
+    c.execute(INSERT_INTO_USER, (user.username,
+                                 user.password,
+                                 user.age))
+
+    db.commit()
+
+
+def promote_to_doctor(user, academic_title):
+    c.execute(SELECT_LAST_USER)
+    users = c.fetchall()
+    doctor = Doctor()
+    doctor.init_components(academic_title)
+
+    print("user = ", users)
+    doctor = (users[0]['id'], doctor.academic_title)
+
+    c.execute(PROMOTE_TO_DOCTOR, doctor)
     db.commit()
 
 
@@ -94,7 +116,21 @@ def add_hospital_stays():
 
 
 def patient_visitations():
-    pass
+    c.execute(SELECT_PATIENTS)
+    patients = c.fetchall()
+    c.execute(SELECT_DOCTORS)
+    doctors = c.fetchall()
+    docids = [doctor['id'] for doctor in doctors]
+
+    for patient in patients:
+        startdate = str(datetime.datetime.now()).split()[0]
+        doctor = choice(docids)
+
+        c.execute(INSERT_INTO_VISITATION, (patient['id'],
+                                           doctor,
+                                           startdate))
+
+    db.commit()
 
 
 def create_and_fill_data():

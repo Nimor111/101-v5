@@ -13,3 +13,11 @@ FROM doctor
 JOIN patient ON doctor.id= patient.doctor
 JOIN hospital_stay ON hospital_stay.patient = patient.id
 GROUP BY doctor.id;
+
+DELETE
+FROM user
+WHERE id > 7;
+
+DELETE
+FROM doctor
+WHERE id > 3;
