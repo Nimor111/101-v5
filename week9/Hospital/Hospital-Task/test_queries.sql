@@ -20,4 +20,37 @@ WHERE id > 7;
 
 DELETE
 FROM doctor
-WHERE id > 3;
+WHERE doctor.id =11;
+
+SELECT user.username, doctor.academic_title
+FROM doctor
+LEFT JOIN user
+ON doctor.id = user.id;
+
+DELETE FROM user WHERE id = 14;
+DELETE FROM sqlite_sequence WHERE name = 'user';
+
+DELETE FROM patient WHERE id = 14;
+
+SELECT doctor.id, user.username, doctor.academic_title
+FROM doctor
+JOIN user ON doctor.id = user.id
+LIMIT 1 OFFSET 0;
+
+UPDATE user
+SET is_active = 0
+WHERE id = 8;
+
+SELECT id
+FROM user
+WHERE username="Pesho";
+
+SELECT GROUP_CONCAT(user.username)
+FROM user
+JOIN patient on patient.id = user.id
+WHERE patient.doctor_id = 3;
+
+SELECT doctor.id
+FROM doctor
+JOIN user ON doctor.id = user.id
+WHERE user.username = "Dr. Pavlina Zdravkova";
