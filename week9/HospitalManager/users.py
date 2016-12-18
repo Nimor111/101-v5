@@ -53,4 +53,15 @@ class Doctor(User):
 
 
 class Patient(User):
-    pass
+
+    def __init__(self):
+        super().__init__()
+
+    def init_components(self, doctor_id):
+        self.doctor_id = doctor_id
+
+    def __str__(self):
+        return super().__str__()
+
+    def __repr__(self):
+        return self.__str__()

@@ -33,6 +33,7 @@ CREATE_DOCTOR_TABLE = '''
     CREATE TABLE IF NOT EXISTS DOCTOR (
         ID INTEGER PRIMARY KEY,
         ACADEMIC_TITLE TEXT,
+        VISITATION_HOURS TEXT DEFAULT 'N/A',
         FOREIGN KEY (ID) REFERENCES USER(ID)
     )
 '''
@@ -110,4 +111,116 @@ SELECT_LAST_USER = '''
     SELECT *
     FROM user
     WHERE user.id = ( SELECT MAX(id) FROM USER )
+'''
+
+SELECT_DOCTOR_NAME = '''
+    SELECT user.username, doctor.academic_title
+    FROM doctor
+    LEFT JOIN user
+    ON doctor.id = user.id
+'''
+
+SELECT_SPECIFIC_DOCTOR = '''
+    SELECT doctor.id, user.username, doctor.academic_title
+    FROM doctor
+    LEFT JOIN user
+    ON doctor.id = user.id
+    LIMIT 1 OFFSET ?
+'''
+
+UPDATE_LOGIN = '''
+    UPDATE user
+    SET is_active = 1
+    WHERE id = ?
+'''
+
+UPDATE_LOGOUT = '''
+    UPDATE USER
+    SET IS_ACTIVE = 0
+    WHERE user.username = ?
+'''
+
+UPDATE_VISITATION_HOURS = '''
+    UPDATE doctor
+    SET visitation_hours = ?
+    WHERE doctor.id = ?
+'''
+
+GET_PATIENT_BY_USERNAME = '''
+    SELECT *
+    FROM patient
+    JOIN user ON patient.id = user.id
+    WHERE user.username = ?
+'''
+
+GET_ACADEMIC_TITLE = '''
+    SELECT doctor.academic_title
+    FROM patient
+    JOIN doctor ON patient.doctor_id = doctor.id
+    JOIN user ON patient.id = user.id
+    WHERE user.username = ?
+'''
+
+GET_HOSPITAL_STAYS = '''
+    SELECT h.startdate, h.room, h.injury
+    FROM hospital_stay AS h
+    JOIN patient ON patient.id = h.patient_id
+    WHERE patient.id = ?
+'''
+
+UPDATE_USERNAME = '''
+    UPDATE user
+    SET username = ?, age = ?
+    WHERE username = ?
+'''
+
+UPDATE_DOCTOR = '''
+    UPDATE patient
+    SET doctor_id = ?
+    WHERE patient.id = ?
+'''
+
+GET_VISITATION_HOURS = '''
+    SELECT doctor.visitation_hours
+    FROM patient
+    JOIN doctor ON patient.doctor_id = doctor.id
+    WHERE patient.id = ?
+'''
+
+GET_DOCTOR_PATIENTS = '''
+    SELECT
+    GROUP_CONCAT(user.username) AS patients
+    FROM user
+    JOIN patient ON patient.id = user.id
+    WHERE patient.doctor_id = ?
+'''
+
+GET_DOCTOR_ID_BY_NAME = '''
+    SELECT doctor.id
+    FROM doctor
+    JOIN user ON user.id = doctor.id
+    WHERE user.username = ?
+'''
+
+GET_DOCTOR_BY_USERNAME = '''
+    SELECT *
+    FROM doctor
+    JOIN user ON user.id = doctor.id
+    WHERE user.username = ?
+'''
+
+DELETE_VISITATION_HOURS = '''
+    UPDATE doctor
+    SET visitation_hours = 'N/A'
+    WHERE doctor.id = ?
+'''
+
+
+GET_ROOM_AND_DURATION_OF_STAY = '''
+    SELECT user.username, hospital_stay.room,
+    hospital_stay.startdate, hospital_stay.enddate
+    FROM hospital_stay
+    JOIN patient ON patient.id = hospital_stay.patient_id
+    JOIN user ON patient.id = user.id
+    WHERE patient.doctor_id = ?;
 '''
