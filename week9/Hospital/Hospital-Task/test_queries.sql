@@ -54,3 +54,9 @@ SELECT doctor.id
 FROM doctor
 JOIN user ON doctor.id = user.id
 WHERE user.username = "Dr. Pavlina Zdravkova";
+
+SELECT user.username, hospital_stay.room, hospital_stay.startdate, hospital_stay.enddate
+FROM hospital_stay
+JOIN patient ON patient.id = hospital_stay.patient_id
+JOIN user ON patient.id = user.id
+WHERE patient.doctor_id = 3;
