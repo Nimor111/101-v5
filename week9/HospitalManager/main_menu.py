@@ -148,8 +148,8 @@ class Menu:
             else:
                 break
 
-    def help():
-        return 'TODO'
+    def help(self):
+        print('TODO')
 
     def exit(self):
         sys.exit()
@@ -241,14 +241,6 @@ def main():
             command = input('> ')
         elif command == '4':
             menu.exit()
-
-    # user = menu.register()
-    # print(user)
-    # doctor = Doctor()
-    # doctor.init_components('Pesho', 'Pesho1234567', 24, 'M', 'surgeon')
-    # print(doctor)
-    # promote_to_doctor(user, 'professor')
-    # menu.login()
 
 
 if __name__ == '__main__':
