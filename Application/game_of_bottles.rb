@@ -1,4 +1,5 @@
 # Game of Bottles HackBulgaria problem
+# It is cool!
 class Bottle
   attr_accessor :x, :y
   def initialize(x, y)
