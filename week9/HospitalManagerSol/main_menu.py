@@ -10,7 +10,6 @@ import os
 
 class Menu:
     def __init__(self, name):  # hospital name cus why not
-        self.menu = None
         self.name = name
 
     def welcome_screen(self):
@@ -74,7 +73,7 @@ class Menu:
                 if encode_pass(password) == user['password']:
                     c.execute(UPDATE_LOGIN, (user['id'], ))
                     db.commit()
-                    if 'Dr' in user['username']:
+                    if 'Dr.' in user['username']:
                         c.execute(SELECT_DOCTOR_NAME)
                         doctor = c.fetchone()
                         self.doctor_login(user['username'],
@@ -229,10 +228,11 @@ def main():
     menu = Menu('Hospital Manager')
     menu.welcome_screen()
     command = input('> ')
-
+    dict = {'1': menu.login}
     while True:
         if command == '1':
-            menu.login()
+            dict['1']()
+            # menu.login()
         elif command == '2':
             menu.register()
         elif command == '3':

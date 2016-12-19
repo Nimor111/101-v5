@@ -1,0 +1,5 @@
+length :: [a] -> Int
+isPrime :: Int -> Bool
+isTrue :: Bool -> Bool
+
+isTrue . isPrime . length
