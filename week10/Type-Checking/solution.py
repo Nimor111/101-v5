@@ -28,7 +28,6 @@ def validate_expression(input):
 
     del replaced[0]
     replaced.pop()
-
     replaced = replaced[::-1]
 
     while replaced != []:
