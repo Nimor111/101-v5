@@ -25,7 +25,7 @@ def encrypt(key):
             res = list(res)
             for sym in range(len(res)):
                 if res[sym] != ' ':
-                    sym = chr(ord(res[sym]) + key % 26)
+                    res[sym] = chr(ord(res[sym]) + key % 26)
             return ''.join(res)
         return encrypter
     return accepter

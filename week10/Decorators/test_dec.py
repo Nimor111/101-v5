@@ -1,5 +1,5 @@
 import unittest
-from decos import accepts
+from decos import accepts, encrypt
 
 
 class TestDec(unittest.TestCase):
@@ -22,6 +22,14 @@ class TestDec(unittest.TestCase):
             return "Hello, I am {}".format(name)
 
         self.assertEqual(say_hello('Georgi'), "Hello, I am Georgi")
+
+    def test_encrypts_string_correctly_with_step_2(self):
+
+        @encrypt(2)
+        def get_low():
+            return "Get get get low"
+
+        self.assertEqual(get_low(), "Igv igv igv nqy")
 
 
 if __name__ == '__main__':
