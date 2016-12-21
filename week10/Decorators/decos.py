@@ -37,7 +37,7 @@ def get_low():
 
 
 def main():
-    print(get_low())
+    pass
 
 
 if __name__ == '__main__':
