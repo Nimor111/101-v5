@@ -1,4 +1,7 @@
 from functools import wraps
+from datetime import datetime
+from time import time
+from time import sleep
 
 
 def accepts(*types, **kwargs):
@@ -39,13 +42,48 @@ def encrypt(key):
     return accepter
 
 
+def log(filename):
+    def accepter(func):
+        @wraps(func)
+        def decorator(*args, **kwargs):
+            with open(filename, 'a') as f:
+                f.write("{} was called at {}\n".format(func.__name__,
+                                                       datetime.now()))
+            return func(*args, **kwargs)
+        return decorator
+    return accepter
+
+
+@log('log.txt')
 @encrypt(2)
 def get_low(a):
     return "Get get get low" * a
 
 
+def performance(filename):
+    def accepter(func):
+        @wraps(func)
+        def decorator(*args, **kwargs):
+            start_time = time()
+            res = func(*args, **kwargs)
+            end_time = time()
+            with open(filename, 'a') as f:
+                f.write("{} was called and took {} seconds to complete.\n"
+                        .format(func.__name__, end_time - start_time))
+            return func(*args, **kwargs)
+        return decorator
+    return accepter
+
+
+@performance('logp.txt')
+def something_heavy():
+    sleep(2)
+    return "I am done!"
+
+
 def main():
     print(get_low(1))
+    print(something_heavy())
 
 
 if __name__ == '__main__':

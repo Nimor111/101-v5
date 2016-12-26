@@ -1,5 +1,5 @@
 import unittest
-from decos import accepts, encrypt
+from decos import accepts, encrypt, log
 
 
 class TestDec(unittest.TestCase):
@@ -30,6 +30,9 @@ class TestDec(unittest.TestCase):
             return "Get get get low"
 
         self.assertEqual(get_low(), "Igv igv igv nqy")
+
+    def test_log_writes_correctly_to_file(self):
+        pass
 
 
 if __name__ == '__main__':

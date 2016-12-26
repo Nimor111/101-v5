@@ -1,0 +1,9 @@
+get_low was called at 2016-12-26 12:06:48.207942
+get_low was called at 2016-12-26 12:06:49.183028
+get_low was called at 2016-12-26 12:06:51.054011
+get_low was called at 2016-12-26 12:08:55.124512
+get_low was called at 2016-12-26 21:19:51.390118
+get_low was called at 2016-12-26 21:20:05.626707
+get_low was called at 2016-12-26 21:20:27.025945
+get_low was called at 2016-12-26 21:21:02.302359
+get_low was called at 2016-12-26 21:21:40.902954
