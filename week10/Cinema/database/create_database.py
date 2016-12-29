@@ -58,7 +58,12 @@ def insert_reservations():
 def insert_users():
     users = [("Rositsa Zlateva", "12345678"),
              ("Slavyana Monkova", "12345678"),
-
+             ("Radoslav Georgiev", "12345678"),
+             ("Krasimira Badova", "12345678"),
+             ("Kiril Hristov", "12432837"),
+             ("Vladimir Delchev", "123653749")]
+    c.executemany(INSERT_USERS, users)
+    db.commit()
 
 
 def main():
@@ -67,6 +72,7 @@ def main():
     insert_movies()
     insert_projections()
     insert_reservations()
+    insert_users()
 
 
 if __name__ == '__main__':
