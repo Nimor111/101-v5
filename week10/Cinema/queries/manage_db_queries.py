@@ -3,3 +3,8 @@ ORDER_BY_RATING = '''
     FROM movies
     ORDER BY rating DESC
 '''
+
+SELECT_USERS = '''
+    SELECT username || " " || password
+    FROM users
+'''

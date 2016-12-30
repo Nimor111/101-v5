@@ -11,9 +11,8 @@ def encode_pass(pw):
 
 
 def validate_pass(pw):
-    if re.search(r'[A-Z]', pw) and re.search(r'[a-z]', pw) \
-       and re.search(r'[^0-9A-Za-z]', pw) \
-       and len(pw) > 7:
+    if re.search(r'[A-Z]', pw) and re.search(r'[^0-9A-Za-z]', pw) \
+     and len(pw) > 7:
         return True
     return False
 
