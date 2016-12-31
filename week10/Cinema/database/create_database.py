@@ -73,6 +73,7 @@ def main():
     insert_projections()
     insert_reservations()
     insert_users()
+    db.close()
 
 
 if __name__ == '__main__':
