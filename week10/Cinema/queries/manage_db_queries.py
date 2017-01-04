@@ -19,7 +19,7 @@ ORDER_BY_ONLY_ID = '''
 '''
 
 ORDER_BY_DATE_AND_ID = '''
-    SELECT movies.name, projections.time_, projections.type
+    SELECT movies.name, projections.time_, projections.type, projections.id
     FROM movies
     JOIN projections ON movies.id = projections.movie_id
     WHERE movies.id = ? AND projections.date_ = ?

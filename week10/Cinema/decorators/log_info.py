@@ -6,5 +6,5 @@ def log_info(func):
         @wraps(func)
         with open("log_info.txt") as f:
             f.write("Reservation made on {}".format(str(datetime.now())))
-        return func
+        return func(*args, **kwargs)
     return accepter

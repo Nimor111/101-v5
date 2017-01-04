@@ -4,6 +4,8 @@ from queries.create_db_queries import INSERT_USERS, INSERT_RESERVATIONS
 from settings.sql_creation_settings import *
 from sys import argv
 from decorators.atomic import *
+from settings.general_settings import PROJECTIONS
+from user_interface.projection import Projection
 
 
 db = sqlite3.connect(DB_NAME)
@@ -32,7 +34,7 @@ def show_movie_projections():
     if len(argv) == 3:
         c.execute(ORDER_BY_DATE_AND_ID, (argv[1], argv[2]))
         projections = c.fetchall()
-    else:
+    elif len(argv) == 2:
         c.execute(ORDER_BY_ONLY_ID, (argv[1], ))
         projections = c.fetchall()
 
@@ -40,15 +42,20 @@ def show_movie_projections():
         print("Projections for movie '{}' on date {}:"
               .format(projections[0]['name'], argv[2]))
         for projection in range(len(projections)):
-            print("[{}] - {} ({})".format(projection + 1,
-                                          projections[projection]['time_'],
-                                          projections[projection]['type']))
-    else:
+            print("[{}] - {} ({}) - {} spots available"
+                  .format(projections[projection]['id'],
+                          projections[projection]['time_'],
+                          projections[projection]['type'],
+                          PROJECTIONS[projections[projection]['id'] - 1]
+                          .free_seats()))
+    elif len(argv) == 2:
         print("Projections for movie '{}':".format(projections[0]['name']))
         for projection in projections:
-            print("[{}] - {} ({})".format(projection['id'],
-                                          projection['time_'],
-                                          projection['type']))
+            print("[{}] - {} ({}) - {} spots available"
+                  .format(projection['id'],
+                          projection['time_'],
+                          projection['type'],
+                          PROJECTIONS[projection['id'] - 1].free_seats()))
 
 
 @atomic
@@ -109,7 +116,7 @@ def insert_reservation(user, projection, row, col):
 
 def main():
     show_movie_projections()
-    show_movies()
+    # show_movies()
     db.close()
 
 
