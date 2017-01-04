@@ -2,6 +2,7 @@ import hashlib
 import getpass
 import base64
 import re
+from user_interface.validators import *
 
 
 def encode_pass(pw):
@@ -13,24 +14,18 @@ def encode_pass(pw):
     return pw
 
 
-def validate_pass(pw):
-    '''
-    Validate password - Capital letter, Symbol, Longer than 7 symbols
-    '''
-    if re.search(r'[A-Z]', pw) and re.search(r'[^0-9A-Za-z]', pw) \
-       and len(pw) > 7:
-        return True
-    return False
-
-
 def validate_password(func):
     '''
     Decorator to validate password
     '''
     def accepter(password):
-        if validate_pass(password):
-            return func(password)
-        return False
+        while validate_pass(password) is False:
+            print("""
+            Invalid password! Must be 8 symbols long, contain at least one
+            special symbol, and have at least one capital letter!
+            """)
+            password = input("Enter new password: ")
+        return func(password)
     return accepter
 
 

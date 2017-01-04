@@ -5,7 +5,7 @@ ORDER_BY_RATING = '''
 '''
 
 SELECT_USERS = '''
-    SELECT username || " " || password
+    SELECT username, password
     FROM users
 '''
 
@@ -24,4 +24,22 @@ ORDER_BY_DATE_AND_ID = '''
     JOIN projections ON movies.id = projections.movie_id
     WHERE movies.id = ? AND projections.date_ = ?
     ORDER BY time_
+'''
+
+SET_LOGGED = '''
+    UPDATE users
+    SET logged = 1
+    WHERE users.username = ?
+'''
+
+SET_LOGOUT = '''
+    UPDATE users
+    SET logged = 0
+    WHERE users.username = ?
+'''
+
+SELECT_LOGGED = '''
+    SELECT logged
+    FROM users
+    WHERE users.username = ?
 '''

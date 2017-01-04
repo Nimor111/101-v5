@@ -1,18 +1,20 @@
 from settings.sql_creation_settings import DB_NAME
+from functools import wraps, partial
 import sqlite3
 
 
-db = sqlite3.connect('../{}'.format(DB_NAME))
+db = sqlite3.connect(DB_NAME)
 db.row_factory = sqlite3.Row
 c = db.cursor()
 
 
 def atomic(func):
-    def accepter():
+
+    @wraps(func)
+    def accepter(*args, **kwargs):
         try:
-            func()
+            res = func(*args, **kwargs)
+            return res
         except:
             db.rollback()
-        finally:
-            db.close()
     return accepter

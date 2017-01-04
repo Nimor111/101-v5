@@ -26,6 +26,9 @@ class Projection:
         self.hall[row][col] = 'x'
         return self.hall
 
+    def free_seats(self):
+        return len([seat for seat in self.hall if seat != 'x'])
+
 
 def main():
     proj = Projection()
