@@ -1,16 +1,16 @@
-from decorators.user_exists import *
-from settings.general_settings import PROJECTIONS
+from decorators.user_exists import user_exists
+import interface
 
 
 @user_exists
 def make_reservation(user, password):
-    pass
+    interface.PROJECTIONS[0].reserve_seat(9, 9)
 
 
 def main():
-    make_reservation("Georgi Bojinov", "KIMmuriel15@FH")
-    PROJECTIONS[0].reserve_seat(1, 1)
-    print(PROJECTIONS[0])
+    # interface.PROJECTIONS = "Pesho"
+    # make_reservation("Georgi Bojinov", "KIMmuriel15@FH")
+    print(interface.PROJECTIONS)
 
 
 if __name__ == '__main__':

@@ -4,7 +4,6 @@ from queries.create_db_queries import INSERT_USERS, INSERT_RESERVATIONS
 from settings.sql_creation_settings import *
 from sys import argv
 from decorators.atomic import *
-from settings.general_settings import PROJECTIONS
 from user_interface.projection import Projection
 
 
