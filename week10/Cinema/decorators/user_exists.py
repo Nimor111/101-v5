@@ -6,6 +6,9 @@ from decorators.password import encode_pass
 
 
 def user_exists(func):
+    """
+    Does user exist in the system? Check login, check registration
+    """
     def accepter(user, password):
         users = get_users()
         usernames = [person['username'] for person in users]

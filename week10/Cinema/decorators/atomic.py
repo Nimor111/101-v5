@@ -9,7 +9,9 @@ c = db.cursor()
 
 
 def atomic(func):
-
+    """
+    Check if communication with database is legit
+    """
     @wraps(func)
     def accepter(*args, **kwargs):
         try:
