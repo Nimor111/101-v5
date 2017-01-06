@@ -22,7 +22,7 @@ def user_exists(func):
         elif logged(user) is False:
             pw = [person['password'] for person in users if person['username']
                   == user][0]
-            while encode_pass(password) == pw:
+            while encode_pass(password) != encode_pass(pw):
                 password = input("Incorrect pass! Enter again: ")
             print("Logging in...")
             login(user)

@@ -4,7 +4,9 @@ from queries.create_db_queries import INSERT_USERS, INSERT_RESERVATIONS
 from settings.sql_creation_settings import *
 from sys import argv
 from decorators.atomic import *
+from settings.general_settings import PROJECTIONS
 from user_interface.projection import Projection
+from settings.reservations import reservations
 
 
 db = sqlite3.connect(DB_NAME)
@@ -113,7 +115,27 @@ def insert_reservation(user, projection, row, col):
     db.commit()
 
 
+@atomic
+def get_user_id(user):
+    """
+    Get id of user by username
+    """
+    c.execute(SELECT_ID_BY_NAME, (user, ))
+    return c.fetchone()['id']
+
+
+@atomic
+def get_movie_and_proj_info(movie_id, proj_id):
+    """
+    Get movie name, rating, projection date, time, and type
+    from given movie id and projection id
+    """
+    c.execute(SELECT_MOVIE_PROJ_INFO, (movie_id, proj_id))
+    return c.fetchone()
+
+
 def main():
+    reservations()
     show_movie_projections()
     # show_movies()
     db.close()

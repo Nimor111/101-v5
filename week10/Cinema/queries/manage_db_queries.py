@@ -1,7 +1,6 @@
 ORDER_BY_RATING = '''
     SELECT *
     FROM movies
-    ORDER BY rating DESC
 '''
 
 SELECT_USERS = '''
@@ -42,4 +41,18 @@ SELECT_LOGGED = '''
     SELECT logged
     FROM users
     WHERE users.username = ?
+'''
+
+SELECT_ID_BY_NAME = '''
+    SELECT id
+    FROM users
+    WHERE username = ?
+'''
+
+SELECT_MOVIE_PROJ_INFO = '''
+    SELECT movies.name, movies.rating, projections.date_, projections.time_,
+           projections.type
+    FROM movies
+    JOIN projections on movies.id = projections.movie_id
+    WHERE movies.id = ? and projections.id = ?
 '''

@@ -30,12 +30,19 @@ class Projection:
     def free_seats(self):
         return (self.hall == '.').sum()
 
+    def is_free_seat(self, seats):
+        if seats[0] < 1 or seats[0] > 10 \
+                              or seats[1] <= 0 or seats[0] > 10:
+            return None
+        return self.hall[seats[0]][seats[1]] != 'x'
+
 
 def main():
-    proj = Projection(1)
-    proj.reserve_seat(1, 1)
-    proj.reserve_seat(2, 2)
-    print(proj)
+    pass
+    # proj = Projection(1)
+    # proj.reserve_seat(1, 1)
+    # proj.reserve_seat(2, 2)
+    # print(proj)
 
 
 if __name__ == '__main__':
