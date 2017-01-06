@@ -1,6 +1,5 @@
 from decorators.user_exists import user_exists
 from database.modify_database import *
-from subprocess import check_output
 from settings.reservations import reservations
 from settings.general_settings import PROJECTIONS
 from decorators.log_info import log_info
@@ -18,8 +17,7 @@ def make_reservation(user, password=None):
     tickets = int(input("Step 1 (User): Choose number of tickets>"))
     show_movies()
     movie = input("Step 2 (Movie) : Choose a movie> ")
-    print(check_output(['py', 'database/modify_database.py',
-                        "{}".format(movie)]).decode("utf-8").strip())
+    show_movie_projections(movie)
     projection = int(input("Step 3 (Projection): Choose a projection>"))
     proj = Projection(projection)
     proj.hall = PROJECTIONS[projection - 1].hall

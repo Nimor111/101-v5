@@ -28,20 +28,20 @@ def show_movies():
 
 
 @atomic
-def show_movie_projections():
+def show_movie_projections(*args):
     """
     Displays projections for given movie ordered by time
     """
-    if len(argv) == 3:
-        c.execute(ORDER_BY_DATE_AND_ID, (argv[1], argv[2]))
+    if len(args) == 2:
+        c.execute(ORDER_BY_DATE_AND_ID, (args[0], args[1]))
         projections = c.fetchall()
-    elif len(argv) == 2:
-        c.execute(ORDER_BY_ONLY_ID, (argv[1], ))
+    elif len(argv) == 1:
+        c.execute(ORDER_BY_ONLY_ID, (args[0], ))
         projections = c.fetchall()
 
-    if len(argv) == 3:
+    if len(args) == 2:
         print("Projections for movie '{}' on date {}:"
-              .format(projections[0]['name'], argv[2]))
+              .format(projections[0]['name'], args[1]))
         for projection in range(len(projections)):
             print("[{}] - {} ({}) - {} spots available"
                   .format(projections[projection]['id'],
@@ -49,7 +49,7 @@ def show_movie_projections():
                           projections[projection]['type'],
                           PROJECTIONS[projections[projection]['id'] - 1]
                           .free_seats()))
-    elif len(argv) == 2:
+    elif len(args) == 1:
         print("Projections for movie '{}':".format(projections[0]['name']))
         for projection in projections:
             print("[{}] - {} ({}) - {} spots available"

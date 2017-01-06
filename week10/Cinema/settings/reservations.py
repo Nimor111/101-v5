@@ -13,3 +13,5 @@ def reservations():
     settings.general_settings.PROJECTIONS[5]. reserve_seat(2, 2)
     settings.general_settings.PROJECTIONS[5]. reserve_seat(3, 3)
     settings.general_settings.PROJECTIONS[5]. reserve_seat(4, 4)
+    settings.general_settings.PROJECTIONS[1]. reserve_seat(1, 1)
+    settings.general_settings.PROJECTIONS[1]. reserve_seat(2, 2)
