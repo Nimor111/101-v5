@@ -8,12 +8,18 @@ from sys import exit
 
 @log_info
 def finalize(user_id, projection_id, seats):
+    """
+    Method called to enter reservations into the database
+    """
     for seat in seats:
         insert_reservation(user_id, projection_id, seat[0], seat[1])
 
 
 @user_exists
 def make_reservation(user, password=None):
+    """
+    The main menu of the program a.k.a the main functions of the CLI
+    """
     print("Hello, {}".format(user))
     tickets = int(input("Step 1 (User): Choose number of tickets>"))
     show_movies()
