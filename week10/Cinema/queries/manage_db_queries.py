@@ -56,3 +56,10 @@ SELECT_MOVIE_PROJ_INFO = '''
     JOIN projections on movies.id = projections.movie_id
     WHERE movies.id = ? and projections.id = ?
 '''
+
+DELETE_RESERVATION = '''
+    DELETE
+    FROM reservations
+    JOIN users ON users.id = reservations.user_id
+    WHERE users.username = ?
+'''

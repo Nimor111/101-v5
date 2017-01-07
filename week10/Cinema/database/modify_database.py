@@ -134,6 +134,15 @@ def get_movie_and_proj_info(movie_id, proj_id):
     return c.fetchone()
 
 
+@atomic
+def delete_reservations_by_name(username):
+    """
+    Delete a user's reservations by given username
+    """
+    c.execute(DELETE_RESERVATION, (username, ))
+    db.commit()
+
+
 def main():
     reservations()
     show_movie_projections()

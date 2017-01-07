@@ -3,6 +3,7 @@ from database.modify_database import *
 from settings.reservations import reservations
 from settings.general_settings import PROJECTIONS
 from decorators.log_info import log_info
+from sys import exit
 
 
 @log_info
@@ -53,6 +54,18 @@ reserve_seat({}, {})\n".format(projection - 1, seats[0], seats[1]))
     finalize(user_id, projection, chosen_seats)
     print("Thanks.")
     logout(user)
+
+
+def cancel_reservation(username):
+    delete_reservations_by_name(username)
+
+
+def exit():
+    sys.exit()
+
+
+def da_help():
+    print("We shall help you at some point in the future")
 
 
 def main():
