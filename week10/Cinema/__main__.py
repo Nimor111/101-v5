@@ -1,11 +1,10 @@
-from user_interface.main_menu import make_reservation, finalize, log_info
 import settings.reservations
-import settings.general_settings
+from user_interface.interface import interface
 
 
 def main():
     settings.reservations.reservations()
-    make_reservation("Georgi Bojinov", "Ilikecake@")
+    interface()
 
 
 if __name__ == '__main__':
