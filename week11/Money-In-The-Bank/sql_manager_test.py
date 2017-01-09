@@ -2,9 +2,14 @@ import sys
 import unittest
 import os
 import sql_manager
-from queries import COUNT_CLIENTS
+import sqlite3
+import queries
+import settings
 
 sys.path.append("..")
+
+conn = sqlite3.connect(settings.TEST_DB_NAME)
+sql_manager.cursor = conn.cursor()
 
 
 class SqlManagerTests(unittest.TestCase):
@@ -18,12 +23,12 @@ class SqlManagerTests(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        os.remove("bank.db")
+        os.remove(settings.TEST_DB_NAME)
 
     def test_register(self):
         sql_manager.register('Dinko', '123123')
 
-        sql_manager.cursor.execute(COUNT_CLIENTS, ('Dinko', '123123'))
+        sql_manager.cursor.execute(queries.COUNT_CLIENTS, ('Dinko', '123123'))
         users_count = sql_manager.cursor.fetchone()
 
         self.assertEqual(users_count[0], 1)
