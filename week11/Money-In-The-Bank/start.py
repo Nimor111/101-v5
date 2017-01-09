@@ -3,8 +3,8 @@ import sys
 
 
 def main_menu():
-    print("Welcome to our bank service. You are not logged in.\n \
-          Please register or login")
+    print("Welcome to our bank service. You are not logged in.\n\
+Please register or login")
 
     while True:
         command = input("$$$>")

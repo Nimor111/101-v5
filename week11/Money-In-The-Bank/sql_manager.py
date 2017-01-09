@@ -3,6 +3,7 @@ from client import Client
 from queries import *
 import settings
 
+
 conn = sqlite3.connect(settings.DB_NAME)
 cursor = conn.cursor()
 
