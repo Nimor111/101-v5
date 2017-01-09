@@ -73,7 +73,6 @@ def logged_menu(logged_user):
 
 
 def main():
-    sql_manager.create_clients_table()
     main_menu()
 
 
