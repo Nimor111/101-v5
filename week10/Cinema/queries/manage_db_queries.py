@@ -60,6 +60,9 @@ SELECT_MOVIE_PROJ_INFO = '''
 DELETE_RESERVATION = '''
     DELETE
     FROM reservations
-    JOIN users ON users.id = reservations.user_id
-    WHERE users.username = ?
+    WHERE reservations.user_id IN (
+    SELECT users.id
+    FROM users
+    JOIN reservations ON users.id = reservations.user_id
+    WHERE users.username = ?)
 '''
