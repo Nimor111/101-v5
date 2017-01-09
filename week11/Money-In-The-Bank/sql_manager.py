@@ -6,6 +6,10 @@ conn = sqlite3.connect("bank.db")
 cursor = conn.cursor()
 
 
+def drop_clients_table():
+    cursor.execute(DROP_TABLE)
+
+
 def create_clients_table():
     cursor.execute(CREATE_TABLE)
 
