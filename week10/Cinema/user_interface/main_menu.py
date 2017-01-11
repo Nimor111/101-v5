@@ -9,18 +9,18 @@ from termcolor import cprint
 
 @log_info
 def finalize(user_id, projection_id, seats):
-    """
+    '''
     Method called to enter reservations into the database
-    """
+    '''
     for seat in seats:
         insert_reservation(user_id, projection_id, seat[0], seat[1])
 
 
 @user_exists
 def make_reservation(user, password=None):
-    """
+    '''
     The main menu of the program a.k.a the main functions of the CLI
-    """
+    '''
     cprint("Hello, {}".format(user), 'yellow')
     tickets = int(input("Step 1 (User): Choose number of tickets>"))
     show_movies()
@@ -70,7 +70,7 @@ def cancel_reservation(username):
     User cancelling reservation
     '''
     delete_reservations_by_name(username)
-    with open('settings/reservations.py', 'r+') as f:
+    with open('settings/reservations.py', 'r') as f:
         lines = f.readlines()
     print(lines)
     cprint('How many tickets did you have? ', 'cyan')
@@ -88,6 +88,10 @@ def cancel_reservation(username):
 
 
 def exit():
+    cprint('Username: ', 'cyan')
+    username = input()
+    if logged(username):
+        logout(username)
     sys.exit()
 
 

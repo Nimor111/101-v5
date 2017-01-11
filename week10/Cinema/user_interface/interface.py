@@ -3,9 +3,9 @@ from termcolor import cprint
 
 
 def interface():
-    """
+    '''
     Main interface for the console app
-    """
+    '''
     cprint('Welcome to the best cinema in the world!', 'green')
     commands = {'1': show_movies, '2': show_movie_projections,
                 '3': make_reservation, '4': cancel_reservation,

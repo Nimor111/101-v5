@@ -42,6 +42,8 @@ def check_user(username):
         new_user = User(user, password)
         insert_user(new_user)
 
+    return username
+
 
 def check_login(username, password):
     '''
@@ -55,3 +57,5 @@ def check_login(username, password):
         password = input("Incorrect pass! Enter again: ")
     print("Logging in...")
     login(username)
+
+    return username

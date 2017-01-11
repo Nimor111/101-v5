@@ -39,10 +39,6 @@ class Projection:
 
 def main():
     pass
-    # proj = Projection(1)
-    # proj.reserve_seat(1, 1)
-    # proj.reserve_seat(2, 2)
-    # print(proj)
 
 
 if __name__ == '__main__':
