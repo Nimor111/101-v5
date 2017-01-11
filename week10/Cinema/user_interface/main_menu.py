@@ -66,6 +66,9 @@ reserve_seat({}, {}) # Made by {}\n".format(projection - 1,
 
 
 def cancel_reservation(username):
+    '''
+    User cancelling reservation
+    '''
     delete_reservations_by_name(username)
     with open('settings/reservations.py', 'r+') as f:
         lines = f.readlines()
@@ -89,7 +92,13 @@ def exit():
 
 
 def da_help():
-    print("We shall help you at some point in the future")
+    print("show movies - show current movies in the cinema")
+    print("show projections - asks for movie id and optional date, \
+shows projections for chosen movie")
+    print("make reservation - make a reservation in our cinema!")
+    print("cancel reservation - cancel your last reservation in our cinema")
+    print("exit - log out of our system")
+    print("help - what you just clicked")
 
 
 def main():

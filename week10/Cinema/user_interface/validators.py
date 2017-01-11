@@ -1,5 +1,7 @@
 import re
 from database.modify_database import *
+from user_interface.user import *
+import decorators.password
 
 
 def validate_pass(pw):
@@ -24,3 +26,32 @@ def validate_username(username):
         username = input("Username exists. Enter new username: ")
 
     return username
+
+
+def check_user(username):
+    '''
+    Check if user exists in the db - if not prompt for registration
+    '''
+    users = get_users()
+    usernames = [person['username'] for person in users]
+
+    if username not in usernames:
+        print("You are not registered! Make an account!")
+        user = input("Enter a username: ")
+        password = input("Enter a password: ")
+        new_user = User(user, password)
+        insert_user(new_user)
+
+
+def check_login(username, password):
+    '''
+    Check if user is inputting correct password
+    '''
+    users = get_users()
+    pw = [person['password'] for person in users if person['username']
+          == username][0]
+    while decorators.password.encode_pass(password) \
+            != decorators.password.encode_pass(pw):
+        password = input("Incorrect pass! Enter again: ")
+    print("Logging in...")
+    login(username)
