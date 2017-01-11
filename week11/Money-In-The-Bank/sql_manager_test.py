@@ -19,7 +19,7 @@ class SqlManagerTests(unittest.TestCase):
         sql_manager.register('Tester', '123')
 
     def tearDown(self):
-        sql_manager.cursor.execute('DROP TABLE clients')
+        sql_manager.cursor.execute(queries.DROP_TABLE)
 
     @classmethod
     def tearDownClass(cls):
