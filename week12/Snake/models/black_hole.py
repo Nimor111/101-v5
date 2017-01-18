@@ -1,0 +1,2 @@
+class BlackHole(WorldObject):
+    pass

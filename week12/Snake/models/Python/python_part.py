@@ -1,0 +1,2 @@
+class PythonPart:
+    pass
