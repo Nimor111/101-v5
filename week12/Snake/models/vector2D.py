@@ -13,7 +13,7 @@ class Vector2D:
     def __mul__(self, num):
         return Vector2D(self.x * num, self.y * num)
 
-    def __div__(self, num):
+    def __truediv__(self, num):
         return Vector2D(self.x / num, self.y / num)
 
     def __neg__(self):

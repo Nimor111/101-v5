@@ -1,0 +1,3 @@
+EMPTY = "□"
+FOODS = "🍌"
+WALL = "■"
