@@ -26,8 +26,7 @@ def interface():
             cprint('Enter movie id to see projections> ', 'cyan')
             movie = input()
             cprint("""Enter date if you wish, if not press enter,
-                         date must be in format yyyy-mm-dd, or the universe
-                         will explode.""", 'cyan')
+date must be in format yyyy-mm-dd, or the universe will explode.""", 'cyan')
             date = input()
             if date:
                 show_movie_projections(movie, date)
