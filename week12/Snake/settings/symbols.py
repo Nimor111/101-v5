@@ -1,3 +1,5 @@
 EMPTY = "□"
 FOODS = "🍌"
 WALL = "■"
+BODY = "●"
+HEAD = "🐍"

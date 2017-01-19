@@ -7,12 +7,8 @@ class Cell:
 
     def __init__(self, contents=None, vector=None):
         self.contents = contents
-        if self.contents is None:
-            self.symbol = symbols.EMPTY
-        elif isinstance(self.contents, Food):
-            self.symbol = symbols.FOODS
-        elif isinstance(self.contents, Wall):
-            self.symbol = symbols.WALL
+        self.symbol = None
+        self.set_symbol()
         if vector is not None:
             self.vector = vector
 
@@ -25,10 +21,18 @@ class Cell:
     def __repr__(self):
         return self.__str__()
 
-    # def set_symbol(self):
-    #     if self.contents is None:
-    #         self.symbol = □
-    #     elif isinstance(self.contents, Food):
-    #         self.symbol = 🍌
-    #     elif isinstance(self.contents, Wall):
-    #         self.symbol = ■
+    def set_symbol(self):
+        if self.contents is None:
+            self.symbol = symbols.EMPTY
+        elif isinstance(self.contents, Food):
+            self.symbol = symbols.FOODS
+        elif isinstance(self.contents, Wall):
+            self.symbol = symbols.WALL
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()

@@ -2,6 +2,7 @@ from models.cell import Cell
 from models.food import Food
 from models.wall import Wall
 from models.vector2D import Vector2D
+from python.python import Python
 
 
 class GameWorld:
@@ -38,6 +39,9 @@ def main():
     cell1 = Cell(Food(), Vector2D(4, 4))
     cell2 = Cell(Wall(), Vector2D(5, 5))
     game.add_content([cell1, cell2])
+    p = Python(game, (5, 2), 5)
+    p.set_head()
+    p.set_body()
     game.print_world()
 
 
