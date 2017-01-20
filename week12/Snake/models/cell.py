@@ -12,6 +12,11 @@ class Cell:
         if vector is not None:
             self.vector = vector
 
+    def empty_cell(self):
+        self.contents = None
+        self.set_symbol()
+        return self
+
     def is_empty(self):
         return self.contents is None
 
