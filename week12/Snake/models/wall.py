@@ -1,4 +1,4 @@
-from world_object import WorldObject
+from models.world_object import WorldObject
 
 
 class Wall(WorldObject):

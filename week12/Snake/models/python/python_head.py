@@ -1,6 +1,6 @@
 from settings import symbols
 from models.cell import Cell
-from python.python_part import PythonPart
+from models.python.python_part import PythonPart
 from models.food import Food
 
 

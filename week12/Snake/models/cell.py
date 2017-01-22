@@ -2,7 +2,7 @@ from models.wall import Wall
 from models.food import Food
 from models.black_hole import BlackHole
 from settings import symbols
-from world_object import WorldObject
+from models.world_object import WorldObject
 
 
 class Cell(WorldObject):
