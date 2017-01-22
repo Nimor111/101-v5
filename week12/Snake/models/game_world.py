@@ -3,6 +3,8 @@ from models.food import Food
 from models.wall import Wall
 from models.vector2D import Vector2D
 from python.python import Python
+import getch
+import os
 
 
 class GameWorld:
@@ -33,7 +35,6 @@ class GameWorld:
 
 def main():
     game = GameWorld(10)
-    print(game[1][-1])
     cell1 = Cell(Food(), Vector2D(4, 4))
     cell2 = Cell(Wall(), Vector2D(5, 5))
     game.add_content([cell1, cell2])
@@ -41,14 +42,17 @@ def main():
     p.set_head()
     p.set_body()
     game.print_world()
-    direction = input("Where to move?")
+    print("Where to move?")
+    direction = getch.getch()
     while direction:
+        os.system('clear')
         p.move(direction)
         if (p.is_dead()):
             print("You dead mate!")
             break
         game.print_world()
-        direction = input("Where to move?")
+        print("Where to move?")
+        direction = getch.getch()
 
 
 if __name__ == '__main__':

@@ -3,6 +3,7 @@ from python.python_body import PythonBody
 from python.python_head import PythonHead
 from models.vector2D import Vector2D
 from models.cell import Cell
+from models.wall import Wall
 
 
 class Python(Cell):
@@ -31,10 +32,11 @@ class Python(Cell):
     def set_head(self, direction=Vector2D(0, 0)):
         self.start = self.start + direction
         self.head = PythonHead(self.start)
-        if (self.head.vector.x < 0 or self.head.vector.x > self.world.size or
-           self.head.vector.y < 0 or self.head.vector.y > self.world.size):
-            print("Killing python...", self.head.vector.x,
-                  self.head.vector.y)
+        if (self.head.vector.x < 0 or self.head.vector.x >= self.world.size or
+           self.head.vector.y < 0 or self.head.vector.y >= self.world.size):
+            return self.kill()
+        if (isinstance(self.world[self.head.vector.x][self.head.vector.y]
+           .contents, Wall)):
             return self.kill()
         self.body_coords[0] = self.head.vector
         self.world.set_cell(self.head)
@@ -63,27 +65,19 @@ class Python(Cell):
                 i += 1
         self.world.add_content(self.body)
 
-    def __choose_direction(self, direction):
-        if direction == 'u' or direction == 'U':
-            return Python.UP
-        elif direction == 'd' or direction == 'D':
-            return Python.DOWN
-        elif direction == 'l' or direction == 'L':
-            return Python.LEFT
-        elif direction == 'r' or direction == 'R':
-            return Python.RIGHT
-
     def move(self, direction):
         self.reset_start()
         self.body_coords.insert(1, self.head.vector)
-        if direction == 'l' or direction == 'L':
+        if ord(direction) == 97:
             self.set_head(Python.LEFT)
-        elif direction == 'r' or direction == 'R':
+        elif ord(direction) == 100:
             self.set_head(Python.RIGHT)
-        elif direction == 'u' or direction == 'U':
+        elif ord(direction) == 119:
             self.set_head(Python.UP)
-        elif direction == 'd' or direction == 'D':
+        elif ord(direction) == 115:
             self.set_head(Python.DOWN)
+        else:
+            raise ValueError("Invalid key!")
         self.empty_last()
         self.body_coords.pop()
         self.world.set_cell(self.head)
@@ -92,4 +86,3 @@ class Python(Cell):
             cell.vector = self.body_coords[i]
             i += 1
         self.world.add_content(self.body)
-        print("Head coords: ", str(self.head.vector))
