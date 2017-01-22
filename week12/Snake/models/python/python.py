@@ -31,8 +31,10 @@ class Python(Cell):
     def set_head(self, direction=Vector2D(0, 0)):
         self.start = self.start + direction
         self.head = PythonHead(self.start)
-        if (self.head.vector.x < 0 or self.head.vector.x > self.size or
-           self.head.vector.y < 0 or self.head.vector.y > self.size):
+        if (self.head.vector.x < 0 or self.head.vector.x > self.world.size or
+           self.head.vector.y < 0 or self.head.vector.y > self.world.size):
+            print("Killing python...", self.head.vector.x,
+                  self.head.vector.y)
             return self.kill()
         self.body_coords[0] = self.head.vector
         self.world.set_cell(self.head)
@@ -90,3 +92,4 @@ class Python(Cell):
             cell.vector = self.body_coords[i]
             i += 1
         self.world.add_content(self.body)
+        print("Head coords: ", str(self.head.vector))
