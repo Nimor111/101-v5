@@ -20,6 +20,7 @@ class Python(Cell):
         self.body = []
         self.start = Vector2D(self.coords[0], self.coords[1])
         self.dead = 0
+        self.body_coords = [Vector2D() for _ in range(self.size)]
 
     def kill(self):
         self.dead = 1
@@ -33,6 +34,7 @@ class Python(Cell):
         if (self.head.vector.x < 0 or self.head.vector.x > self.size or
            self.head.vector.y < 0 or self.head.vector.y > self.size):
             return self.kill()
+        self.body_coords[0] = self.head.vector
         self.world.set_cell(self.head)
 
     def change_start(self, new_coords):
@@ -41,15 +43,22 @@ class Python(Cell):
     def reset_start(self):
         self.start = self.head.vector
 
-    def body_coords(self):
-        pass
+    def empty_last(self):
+        c = Cell(vector=self.body_coords[-1])
+        self.world.set_cell(c)
+
+    def get_body_coords(self):
+        return [str(i) for i in self.body_coords]
 
     def set_body(self):
         self.body = [PythonBody() for _ in range(self.size - 1)]
+        i = 1
         if self.direction == 'u' or self.direction == 'U':
             for cell in self.body:
                 self.start += Python.DOWN
                 cell.vector = self.start
+                self.body_coords[i] = cell.vector
+                i += 1
         self.world.add_content(self.body)
 
     def __choose_direction(self, direction):
@@ -62,14 +71,9 @@ class Python(Cell):
         elif direction == 'r' or direction == 'R':
             return Python.RIGHT
 
-    def add_and_delete_last(self, last):
-        self.world.add_content(self.body)
-        self.world.set_cell(last.empty_cell())
-
     def move(self, direction):
         self.reset_start()
-        self.head.empty_cell()
-        last = deepcopy(self.body[-1])
+        self.body_coords.insert(1, self.head.vector)
         if direction == 'l' or direction == 'L':
             self.set_head(Python.LEFT)
         elif direction == 'r' or direction == 'R':
@@ -78,6 +82,11 @@ class Python(Cell):
             self.set_head(Python.UP)
         elif direction == 'd' or direction == 'D':
             self.set_head(Python.DOWN)
+        self.empty_last()
+        self.body_coords.pop()
+        self.world.set_cell(self.head)
+        i = 1
         for cell in self.body:
-            cell.vector += self.__choose_direction(direction)
-        self.add_and_delete_last(last)
+            cell.vector = self.body_coords[i]
+            i += 1
+        self.world.add_content(self.body)

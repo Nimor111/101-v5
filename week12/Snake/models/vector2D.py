@@ -1,6 +1,6 @@
 class Vector2D:
 
-    def __init__(self, x, y):
+    def __init__(self, x=0, y=0):
         self.x = x
         self.y = y
 
@@ -18,6 +18,12 @@ class Vector2D:
 
     def __neg__(self):
         return Vector2D(-self.x, -self.y)
+
+    def __str__(self):
+        return "({}, {})".format(self.x, self.y)
+
+    def __repr__(self):
+        return self.__str__()
 
 
 def main():
