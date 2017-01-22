@@ -6,8 +6,8 @@ from models.food import Food
 
 class PythonHead(Cell, PythonPart):
 
-    def __init__(self, vector):
-        super().__init__(vector=vector)
+    def __init__(self, v):
+        super().__init__(vector=v)
         self.contents = self
         self.symbol = symbols.HEAD
 

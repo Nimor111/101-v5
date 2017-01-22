@@ -1,14 +1,17 @@
 from models.wall import Wall
 from models.food import Food
+from models.black_hole import BlackHole
 from settings import symbols
+from world_object import WorldObject
 
 
-class Cell:
+class Cell(WorldObject):
 
     def __init__(self, contents=None, vector=None):
         self.contents = contents
         self.symbol = None
         self.set_symbol()
+        self.vector = None
         if vector is not None:
             self.vector = vector
 
@@ -33,6 +36,8 @@ class Cell:
             self.symbol = symbols.FOODS
         elif isinstance(self.contents, Wall):
             self.symbol = symbols.WALL
+        elif isinstance(self.contents, BlackHole):
+            self.symbol = symbols.EMPTY
 
 
 def main():

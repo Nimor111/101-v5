@@ -4,6 +4,7 @@ from python.python_head import PythonHead
 from models.vector2D import Vector2D
 from models.cell import Cell
 from models.wall import Wall
+from models.black_hole import BlackHole
 
 
 class Python(Cell):
@@ -12,7 +13,7 @@ class Python(Cell):
     UP = Vector2D(-1, 0)
     DOWN = Vector2D(1, 0)
 
-    def __init__(self, world, coords, size, direction='U'):
+    def __init__(self, world, coords, size, direction):
         super().__init__()
         self.world = world
         self.coords = coords
@@ -36,7 +37,9 @@ class Python(Cell):
            self.head.vector.y < 0 or self.head.vector.y >= self.world.size):
             return self.kill()
         if (isinstance(self.world[self.head.vector.x][self.head.vector.y]
-           .contents, Wall)):
+           .contents, Wall) or isinstance(self.world[self.head.vector.x]
+           [self.head.vector.y].contents, BlackHole) or isinstance(
+           self.world[self.head.vector.x][self.head.vector.y], PythonBody)):
             return self.kill()
         self.body_coords[0] = self.head.vector
         self.world.set_cell(self.head)
@@ -54,18 +57,40 @@ class Python(Cell):
     def get_body_coords(self):
         return [str(i) for i in self.body_coords]
 
+    def get_direction_for_body(self, direction):
+        if direction == Python.UP:
+            return Python.DOWN
+        elif direction == Python.DOWN:
+            return Python.UP
+        elif direction == Python.LEFT:
+            return Python.RIGHT
+        elif direction == Python.RIGHT:
+            return Python.LEFT
+
     def set_body(self):
         self.body = [PythonBody() for _ in range(self.size - 1)]
         i = 1
-        if self.direction == 'u' or self.direction == 'U':
-            for cell in self.body:
-                self.start += Python.DOWN
-                cell.vector = self.start
-                self.body_coords[i] = cell.vector
-                i += 1
+        direction = self.get_direction_for_body(self.direction)
+        for cell in self.body:
+            self.start += direction
+            cell.vector = self.start
+            self.body_coords[i] = cell.vector
+            i += 1
         self.world.add_content(self.body)
 
+    def find_opposite_direction(self):
+        if self.direction == Python.UP:
+            return Python.DOWN
+        elif self.direction == Python.DOWN:
+            return Python.UP
+        elif self.direction == Python.LEFT:
+            return Python.RIGHT
+        elif self.direction == Python.RIGHT:
+            return Python.LEFT
+
     def move(self, direction):
+        if direction == self.find_opposite_direction():
+            return self.kill()
         self.reset_start()
         self.body_coords.insert(1, self.head.vector)
         if ord(direction) == 97:
@@ -77,7 +102,9 @@ class Python(Cell):
         elif ord(direction) == 115:
             self.set_head(Python.DOWN)
         else:
-            raise ValueError("Invalid key!")
+            print("Invalid key! w - up, s - down, a - left, d - right!")
+            return
+        self.direction = direction
         self.empty_last()
         self.body_coords.pop()
         self.world.set_cell(self.head)

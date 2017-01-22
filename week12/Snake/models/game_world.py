@@ -1,8 +1,9 @@
 from models.cell import Cell
 from models.food import Food
 from models.wall import Wall
+from models.black_hole import BlackHole
 from models.vector2D import Vector2D
-from python.python import Python
+from python.python_main import Python
 import getch
 import os
 
@@ -37,21 +38,20 @@ def main():
     game = GameWorld(10)
     cell1 = Cell(Food(), Vector2D(4, 4))
     cell2 = Cell(Wall(), Vector2D(5, 5))
-    game.add_content([cell1, cell2])
-    p = Python(game, (5, 2), 5)
+    cell3 = Cell(BlackHole(), Vector2D(2, 2))
+    game.add_content([cell1, cell2, cell3])
+    p = Python(game, (5, 2), 5, Python.UP)
     p.set_head()
     p.set_body()
     game.print_world()
-    print("Where to move?")
     direction = getch.getch()
     while direction:
         os.system('clear')
         p.move(direction)
         if (p.is_dead()):
-            print("You dead mate!")
+            print("GAME OVER")
             break
         game.print_world()
-        print("Where to move?")
         direction = getch.getch()
 
 
