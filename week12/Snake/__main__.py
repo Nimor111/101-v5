@@ -54,13 +54,13 @@ def main():
             else:
                 raise DeathError
         except DeathError:
-            with end_log('game_end.txt', 'a') as e:
-                pass
             print("GAME OVER")
             break
         if game.no_food_board():
             print("GAME WON!")
             break
+    with end_log('game_end.txt', 'a') as e:
+                pass
 
 
 if __name__ == '__main__':
