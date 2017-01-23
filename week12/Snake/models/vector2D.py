@@ -1,4 +1,7 @@
-class Vector2D:
+from models.world_object import WorldObject
+
+
+class Vector2D(WorldObject):
 
     def __init__(self, x=0, y=0):
         self.x = x

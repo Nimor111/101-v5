@@ -9,6 +9,10 @@ from models.wall import Wall
 from models.food import Food
 from models.black_hole import BlackHole
 
+from exceptions.exceptions import DirectionError
+
+from context_managers.context_managers import food_log
+
 
 class Python(Cell):
     LEFT = Vector2D(0, -1)
@@ -37,16 +41,24 @@ class Python(Cell):
     def set_head(self, direction=Vector2D(0, 0)):
         self.start = self.start + direction
         self.head = PythonHead(self.start)
-        if (self.head.vector.x < 0 or self.head.vector.x >= self.world.size or
-           self.head.vector.y < 0 or self.head.vector.y >= self.world.size):
+        if self.head.vector.x < 0 or self.head.vector.x >= self.world.size or\
+           self.head.vector.y < 0 or self.head.vector.y >= self.world.size:
             return self.kill()
-        if (isinstance(self.world[self.head.vector.x][self.head.vector.y]
+        if isinstance(self.world[self.head.vector.x][self.head.vector.y]
            .contents, Wall) or isinstance(self.world[self.head.vector.x]
-           [self.head.vector.y].contents, BlackHole) or isinstance(
-           self.world[self.head.vector.x][self.head.vector.y], PythonBody)):
+           [self.head.vector.y].contents, BlackHole):
+            return self.kill()
+        try:
+            if isinstance(self.world[self.head.vector.x][self.head.vector.y],
+                          PythonBody):
+                raise DirectionError
+        except DirectionError:
+            print("WRONG DIRECTION!")
             return self.kill()
         if (isinstance(self.world[self.head.vector.x][self.head.vector.y]
            .contents, Food)):
+            with food_log('food_log.txt', 'a') as f:
+                pass
             self.food_flag = True
         self.body_coords[0] = self.head.vector
         self.world.set_cell(self.head)
@@ -95,9 +107,17 @@ class Python(Cell):
         elif self.direction == Python.RIGHT:
             return Python.LEFT
 
+    def direction_by_ascii_code(self, direction):
+        if ord(direction) == 97:
+            return "left"
+        elif ord(direction) == 100:
+            return "right"
+        elif ord(direction) == 119:
+            return "up"
+        elif ord(direction) == 115:
+            return "down"
+
     def move(self, direction):
-        if direction == self.find_opposite_direction():
-            return self.kill()
         self.reset_start()
         self.body_coords.insert(1, self.head.vector)
         if ord(direction) == 97:

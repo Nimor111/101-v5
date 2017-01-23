@@ -3,7 +3,7 @@ from models.food import Food
 from models.wall import Wall
 from models.black_hole import BlackHole
 from models.vector2D import Vector2D
-from python.python_main import Python
+from models.python.python_main import Python
 import getch
 import os
 
@@ -23,6 +23,13 @@ class GameWorld:
     def __getitem__(self, idx):
         return self.world[idx]
 
+    def no_food_board(self):
+        for cell in self.world:
+            for c in cell:
+                if isinstance(c.contents, Food):
+                    return False
+        return True
+
     def set_cell(self, cell):
         try:
             self.world[cell.vector.x][cell.vector.y] = cell
@@ -35,24 +42,7 @@ class GameWorld:
 
 
 def main():
-    game = GameWorld(10)
-    cell1 = Cell(Food(), Vector2D(4, 4))
-    cell2 = Cell(Wall(), Vector2D(5, 5))
-    cell3 = Cell(BlackHole(), Vector2D(2, 2))
-    game.add_content([cell1, cell2, cell3])
-    p = Python(game, (5, 2), 5, Python.UP)
-    p.set_head()
-    p.set_body()
-    game.print_world()
-    direction = getch.getch()
-    while direction:
-        os.system('clear')
-        p.move(direction)
-        if (p.is_dead()):
-            print("GAME OVER")
-            break
-        game.print_world()
-        direction = getch.getch()
+    pass
 
 
 if __name__ == '__main__':
