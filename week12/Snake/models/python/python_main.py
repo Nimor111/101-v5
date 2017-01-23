@@ -1,5 +1,3 @@
-from copy import deepcopy
-
 from models.python.python_body import PythonBody
 from models.python.python_head import PythonHead
 
