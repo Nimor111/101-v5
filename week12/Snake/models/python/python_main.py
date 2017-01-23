@@ -1,9 +1,12 @@
 from copy import deepcopy
+
 from models.python.python_body import PythonBody
 from models.python.python_head import PythonHead
+
 from models.vector2D import Vector2D
 from models.cell import Cell
 from models.wall import Wall
+from models.food import Food
 from models.black_hole import BlackHole
 
 
@@ -23,6 +26,7 @@ class Python(Cell):
         self.start = Vector2D(self.coords[0], self.coords[1])
         self.dead = 0
         self.body_coords = [Vector2D() for _ in range(self.size)]
+        self.food_flag = False
 
     def kill(self):
         self.dead = 1
@@ -41,6 +45,9 @@ class Python(Cell):
            [self.head.vector.y].contents, BlackHole) or isinstance(
            self.world[self.head.vector.x][self.head.vector.y], PythonBody)):
             return self.kill()
+        if (isinstance(self.world[self.head.vector.x][self.head.vector.y]
+           .contents, Food)):
+            self.food_flag = True
         self.body_coords[0] = self.head.vector
         self.world.set_cell(self.head)
 
@@ -105,8 +112,11 @@ class Python(Cell):
             print("Invalid key! w - up, s - down, a - left, d - right!")
             return
         self.direction = direction
-        self.empty_last()
-        self.body_coords.pop()
+        if not self.food_flag:
+            self.empty_last()
+            self.body_coords.pop()
+        else:
+            self.food_flag = False
         self.world.set_cell(self.head)
         i = 1
         for cell in self.body:
