@@ -24,7 +24,7 @@ UPDATE_PASSWORD = '''
 '''
 
 SELECT_LOGIN = '''
-    SELECT id, username, balance, message
+    SELECT id, password, username, balance, message
     FROM clients
     WHERE username = ? AND password = ?
     LIMIT 1

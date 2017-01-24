@@ -1,5 +1,6 @@
 import sql_manager
 import sys
+from validators import validate_password
 
 
 def main_menu():
@@ -15,7 +16,7 @@ Please register or login")
 
             sql_manager.register(username, password)
 
-            print("Registration Successfull")
+            print("Registration Successful")
 
         elif command == 'login':
             username = input("Enter your username: ")
@@ -67,7 +68,7 @@ def logged_menu(logged_user):
             print("show-message - for showing users message")
             print("exit - logout and exit")
         elif command == 'exit':
-            sys.exit()
+            break
         else:
             print("Invalid command - type help to see commands.")
 

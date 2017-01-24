@@ -2,6 +2,8 @@ import sqlite3
 from client import Client
 from queries import *
 import settings
+from validators import validate_password
+from validators import encode_pass
 
 
 conn = sqlite3.connect(settings.DB_NAME)
@@ -23,20 +25,38 @@ def change_message(new_message, logged_user):
 
 
 def change_pass(new_pass, logged_user):
-    cursor.execute(UPDATE_PASSWORD, (new_pass, logged_user.get_id()))
+    if not validate_password(logged_user.get_username(), new_pass):
+        print("""Invalid password! - 8 symbols, special symbol, capital letter,
+number""")
+        new_pass = input("Enter a new password: ")
+        while not validate_password(logged_user.get_username(), new_pass):
+            print("""Invalid password! - 8 symbols, special symbol,
+capital letter, number""")
+            new_pass = input("Enter a new password: ")
+    cursor.execute(UPDATE_PASSWORD, (encode_pass(new_pass),
+                                     logged_user.get_id()))
     conn.commit()
 
 
 def register(username, password):
-    cursor.execute(INSERT_USER, (username, password))
+    if not validate_password(username, password):
+        print("""Invalid password! - 8 symbols, special symbol, capital letter,
+number""")
+        password = input("Enter a new password: ")
+        while not validate_password(username, password):
+            print("""Invalid password! - 8 symbols, special symbol,
+capital letter, number""")
+            password = input("Enter a new password: ")
+
+    cursor.execute(INSERT_USER, (username, encode_pass(password)))
     conn.commit()
 
 
 def login(username, password):
-    cursor.execute(SELECT_LOGIN, (username, password))
+    cursor.execute(SELECT_LOGIN, (username, encode_pass(password)))
     user = cursor.fetchone()
 
     if(user):
-        return Client(user[0], user[1], user[2], user[3])
+        return Client(user[0], user[2], user[3], user[4])
     else:
         return False
