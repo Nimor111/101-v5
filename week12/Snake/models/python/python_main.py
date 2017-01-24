@@ -51,7 +51,6 @@ class Python(Cell):
                           PythonBody):
                 raise DirectionError
         except DirectionError:
-            print("WRONG DIRECTION!")
             return self.kill()
         if (isinstance(self.world[self.head.vector.x][self.head.vector.y]
            .contents, Food)):
@@ -91,7 +90,8 @@ class Python(Cell):
         for cell in self.body:
             self.start += direction
             cell.vector = self.start
-            self.body_coords[i] = cell.vector
+            if cell.vector.x >= 0 and cell.vector.y >= 0:
+                self.body_coords[i] = cell.vector
             i += 1
         self.world.add_content(self.body)
 

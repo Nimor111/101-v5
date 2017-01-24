@@ -32,7 +32,8 @@ class GameWorld:
 
     def set_cell(self, cell):
         try:
-            self.world[cell.vector.x][cell.vector.y] = cell
+            if (cell.vector.x >= 0 and cell.vector.y >= 0):
+                self.world[cell.vector.x][cell.vector.y] = cell
         except IndexError:
             print("Coordinates go out of the game board!")
 
