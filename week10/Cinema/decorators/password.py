@@ -9,9 +9,9 @@ def encode_pass(pw):
     '''
     Hash password with an awesome mathematical algorithm
     '''
-    t_sha = hashlib.sha512()
-    pw = base64.b64encode(t_sha.digest())
-    return pw
+    hash_object = hashlib.sha256(pw.encode('utf-8'))
+    hex_dig = hash_object.hexdigest()
+    return hex_dig
 
 
 def validate_password(func):
