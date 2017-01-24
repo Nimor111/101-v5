@@ -31,6 +31,12 @@ class SqlManagerTests(unittest.TestCase):
         self.assertFalse(validate_password('Zimbabwe', 'Zimbabwe@21'))
         self.assertTrue(validate_password('Tester', 'SDA@224FS2'))
 
+    def test_has(self):
+        self.assertNotEqual(encode_pass('Zimbabwe@21'),
+                            encode_pass('Peshoepich'))
+        self.assertEqual(encode_pass('Zimbabwe@21'),
+                         encode_pass('Zimbabwe@21'))
+
     def test_register(self):
         sql_manager.register('Dinko', 'AB@3232123')
 

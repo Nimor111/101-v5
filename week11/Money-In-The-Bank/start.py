@@ -1,5 +1,6 @@
 import sql_manager
 import sys
+import getpass
 from validators import validate_password
 
 
@@ -12,7 +13,7 @@ Please register or login")
 
         if command == 'register':
             username = input("Enter your username: ")
-            password = input("Enter your password: ")
+            password = getpass.getpass("Enter your password: ")
 
             sql_manager.register(username, password)
 
@@ -20,7 +21,7 @@ Please register or login")
 
         elif command == 'login':
             username = input("Enter your username: ")
-            password = input("Enter your password: ")
+            password = getpass.getpass("Enter your password: ")
 
             logged_user = sql_manager.login(username, password)
 
