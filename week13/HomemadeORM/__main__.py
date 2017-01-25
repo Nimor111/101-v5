@@ -21,9 +21,12 @@ class Student(User):
 # BaseModel.create_all_tables()
 
 def main():
-    BaseModel.create_all_tables()
-    print(User.create_obj(name="Pesho", age=22).name)
-    print(Student.create_obj(email="Pesho", shirt_size=1).email)
+    # BaseModel.create_all_tables()
+    b = BaseModel()
+    b.create_all_tables()
+    # u = User()
+    # s = Student()
+    # import ipdb; ipdb.set_trace()
 
 
 if __name__ == '__main__':

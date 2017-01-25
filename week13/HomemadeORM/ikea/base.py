@@ -5,7 +5,7 @@ from collections import OrderedDict
 class Metabase(type):
 
     def __new__(cls, name, bases, clsdict):
-        fields = {}
+        fields = OrderedDict()
         clsobj = super().__new__(cls, name, bases, clsdict)
 
         if not hasattr(clsobj, '__tablename__'):
@@ -23,7 +23,7 @@ class Metabase(type):
         for attr, _ in fields.items():
             clsdict.pop(attr)
 
-        setattr(clsobj, '_fields', OrderedDict(fields))
+        setattr(clsobj, 'fields', fields)
 
         return clsobj
 
