@@ -3,9 +3,9 @@ from sqlalchemy import create_engine
 
 from models import Client
 
-import settings
+from settings import DB_NAME
 
-engine = create_engine(settings.DB_NAME)
+engine = create_engine(DB_NAME)
 
 Session = sessionmaker(bind=engine)
 
