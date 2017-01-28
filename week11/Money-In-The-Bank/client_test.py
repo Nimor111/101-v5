@@ -1,7 +1,7 @@
 import sys
 import unittest
 from client import Client
-isys.path.append("..")
+sys.path.append("..")
 
 
 class ClientTests(unittest.TestCase):
