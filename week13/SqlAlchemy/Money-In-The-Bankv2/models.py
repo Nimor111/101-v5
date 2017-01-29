@@ -18,7 +18,7 @@ class Client(Base):
     username = Column(String(255))
     password = Column(String(255))
     balance = Column(Float, default=0)
-    message = Column(String(255), default='')
+    message = Column(String(255), default='Cake')
 
 
 Base.metadata.drop_all(bind=engine)
