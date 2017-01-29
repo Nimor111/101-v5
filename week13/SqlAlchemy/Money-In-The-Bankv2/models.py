@@ -21,5 +21,5 @@ class Client(Base):
     message = Column(String(255), default='Cake')
 
 
-Base.metadata.drop_all(bind=engine)
+# Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)

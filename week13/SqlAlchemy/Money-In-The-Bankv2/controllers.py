@@ -37,10 +37,11 @@ def change_password(new_password, logged_user):
 
 
 def main():
-    register('Pesho', '123')
-    logged_user = login('Pesho', '123')
-    change_message('Cake', logged_user)
-    change_password('Pesho221', logged_user)
+    pass
+    # register('Pesho', '123')
+    # logged_user = login('Pesho', '123')
+    # change_message('Cake', logged_user)
+    # change_password('Pesho221', logged_user)
 
 
 if __name__ == '__main__':
