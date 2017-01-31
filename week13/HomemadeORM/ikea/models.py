@@ -1,7 +1,7 @@
 import sqlite3
 
 from ikea.base import Metabase
-# from ikea.queries import create_table
+from ikea.queries import create_table, insert, drop
 
 
 class BaseModel(metaclass=Metabase):
@@ -13,10 +13,21 @@ class BaseModel(metaclass=Metabase):
     __tablename__ = None
 
     @classmethod
-    def create_all_tables(cls):
+    def drop_tables(cls):
         for reg in list(cls._registry):
-            print(reg.__name__)
+            BaseModel.c.execute(drop(reg))
+        BaseModel.db.commit()
+
+    @classmethod
+    def create_all_tables(cls):
+        BaseModel.drop_tables()
+        for reg in list(cls._registry):
+            BaseModel.c.execute(create_table(reg))
+        BaseModel.db.commit()
 
     @classmethod
     def create_obj(cls, *args, **kwargs):
-        pass
+        print(insert(cls, *args, **kwargs))
+        attrs = tuple([kwargs[key] for key in kwargs])
+        BaseModel.c.execute(insert(cls, *args, **kwargs), attrs)
+        BaseModel.db.commit()

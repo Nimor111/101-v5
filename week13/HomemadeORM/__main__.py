@@ -17,13 +17,12 @@ class Student(User):
     shirt_size = IntegerColumn(number=1)
 
 
-# Creating all tables from BaseModel class
-# BaseModel.create_all_tables()
-
 def main():
-    # BaseModel.create_all_tables()
-    b = BaseModel()
-    b.create_all_tables()
+    # BaseModel.drop_tables()
+    BaseModel.create_all_tables()
+    User.create_obj(name="Evi", age=20)
+    User.create_obj(name="Evi", age=22)
+    User.create_obj(name="Evi", age=24)
     # u = User()
     # s = Student()
     # import ipdb; ipdb.set_trace()

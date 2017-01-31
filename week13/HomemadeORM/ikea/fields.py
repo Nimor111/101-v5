@@ -1,11 +1,16 @@
 class BaseColumn:
 
-    def set_data(self, data):
-        print("EXECUTING")
+    def transform(self, data):
+        return str(data)
+
+    def validate(self, value):
+        return True
 
 
 class PKColumn(BaseColumn):
-    pass
+
+    def transform(self, value):
+        return int(value)
 
 
 class TextColumn(BaseColumn):
@@ -26,6 +31,9 @@ class IntegerColumn(BaseColumn):
 
     def __init__(self, number=20):
         self.number = number
+
+    def transform(self, value):
+        return int(value)
 
     def validate(self, value):
         if value < 0:
