@@ -1,7 +1,8 @@
 import sqlite3
 
 from ikea.base import Metabase
-from ikea.queries import create_table, insert, drop
+from ikea.queries import create_table, insert, drop, select_query
+from collections import OrderedDict
 
 
 class BaseModel(metaclass=Metabase):
@@ -31,3 +32,13 @@ class BaseModel(metaclass=Metabase):
         attrs = tuple([kwargs[key] for key in kwargs])
         BaseModel.c.execute(insert(cls, *args, **kwargs), attrs)
         BaseModel.db.commit()
+
+    @classmethod
+    def filter(cls, **kwargs):
+        obj = BaseModel.c.execute(select_query(cls, list(kwargs.keys())[0],
+                                               list(kwargs.values())[0])) \
+                                  .fetchone()
+        attrs = OrderedDict()
+        for key, value in dict(obj).items():
+            attrs[key] = value
+        return dict(attrs)

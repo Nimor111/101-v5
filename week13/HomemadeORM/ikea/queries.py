@@ -56,6 +56,14 @@ def drop(classname):
     return query
 
 
+def select_query(classname, attr, value):
+    query = "SELECT * FROM {} WHERE {} = {}".format(classname.__tablename__,
+                                                    attr,
+                                                    getattr(classname, attr).
+                                                    transform(value))
+    return query
+
+
 class User():
     __tablename__ = 'users'
 

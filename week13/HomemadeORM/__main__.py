@@ -19,10 +19,11 @@ class Student(User):
 
 def main():
     # BaseModel.drop_tables()
-    BaseModel.create_all_tables()
-    User.create_obj(name="Evi", age=20)
-    User.create_obj(name="Evi", age=22)
-    User.create_obj(name="Evi", age=24)
+    # BaseModel.create_all_tables()
+    # User.create_obj(name="Evi", age=20)
+    # User.create_obj(name="Evi", age=22)
+    # User.create_obj(name="Evi", age=24)
+    print(User.filter(age=20))
     # u = User()
     # s = Student()
     # import ipdb; ipdb.set_trace()
