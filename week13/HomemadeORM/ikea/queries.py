@@ -33,12 +33,6 @@ def create_table(obj):
 
 
 def insert(classname, *args, **kwargs):
-    kwargs = OrderedDict(kwargs)
-    print("Kwargs: ")
-    print(kwargs)
-    print(kwargs)
-    print(kwargs)
-    print(kwargs)
     query = "INSERT INTO {} (".format(classname.__tablename__.upper())
     key_vals = list(kwargs.keys())
     vals = list(kwargs.values())
