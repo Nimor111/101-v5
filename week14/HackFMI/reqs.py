@@ -9,5 +9,3 @@ mentors = requests. \
 
 teams = requests.get('https://hackbulgaria.com/hackfmi/api/public-teams/')
 teams.enconding = 'ISO-8859-1'
-
-import ipdb; ipdb.set_trace()

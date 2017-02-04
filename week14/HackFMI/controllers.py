@@ -34,7 +34,7 @@ def get_team(team_name):
 
 
 def insert_team(name, idea_desc, repo, need_members, members_needed_desc,
-                room, place, techs):
+                room, techs, place="null"):
     team = PublicTeam(name=name, idea_description=idea_desc,   repository=repo,
                       need_more_members=need_members,
                       members_needed_desc=members_needed_desc, room=room,
@@ -47,7 +47,7 @@ def insert_team(name, idea_desc, repo, need_members, members_needed_desc,
 
 
 def insert_mentor(name, description, picture, teams):
-    mentor = Mentor(name=name, description=description, picture=picture)
+    mentor = Mentors(name=name, description=description, picture=picture)
     for team in teams:
         t = get_team(team['name'])
         mentor.teams.append(t)
