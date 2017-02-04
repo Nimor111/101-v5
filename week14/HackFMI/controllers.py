@@ -28,6 +28,11 @@ def get_skill(skill_name):
     return skill
 
 
+def get_mentor(mentor_name):
+    mentor = session.query(Mentors).filter(mentor_name == Mentors.name).one()
+    return mentor
+
+
 def get_team(team_name):
     team = session.query(PublicTeam).filter(team_name == PublicTeam.name).one()
     return team
@@ -53,3 +58,28 @@ def insert_mentor(name, description, picture, teams):
         mentor.teams.append(t)
     session.add(mentor)
     session.commit()
+
+
+def get_teams_in_room(room):
+    teams = session.query(PublicTeam).filter(room == PublicTeam.room).count()
+    return teams
+
+
+def get_teams_for_technology(tech):
+    skill = get_skill(tech)
+    return [t.name for t in skill.teams]
+
+
+def get_mentor_teams(mentor_name):
+    mentor = get_mentor(mentor_name)
+    for team in mentor.teams:
+        print("name: {}, \nidea_description: {}, \nrepository: {}, \
+              \nmore members?: {}, \nwhat members needed?: {},\
+              \nroom: {}, \nskills: {}".format(team.name,
+                                               team.idea_description,
+                                               team.repository,
+                                               team.need_more_members,
+                                               team.members_needed_desc,
+                                               team.room,
+                                               [skill.name for skill in
+                                                team.skills]))
