@@ -20,7 +20,6 @@ def main():
                 [{"name": "HTML / CSS / JavaScript "}, {"name": "Java"}])
     # get_skills()
     skill = get_skill('HTML / CSS / JavaScript ')
-    import ipdb; ipdb.set_trace()
 
 
 if __name__ == '__main__':

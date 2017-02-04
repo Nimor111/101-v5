@@ -28,6 +28,11 @@ class PublicTeam(Base):
             secondary='team_skills',
             back_populates='teams'
             )
+    mentors = relationship(
+                'Mentors',
+                secondary='team_mentors',
+                back_populates='teams'
+                )
 
 
 class SkillList(Base):
@@ -39,11 +44,6 @@ class SkillList(Base):
             PublicTeam,
             secondary='team_skills',
             back_populates='skills'
-            )
-    mentors = relationship(
-            Mentors,
-            secondary='team_mentors',
-            back_populates='teams'
             )
 
 
@@ -69,5 +69,5 @@ class TeamSkills(Base):
 
 class TeamMentors(Base):
     __tablename__ = 'team_mentors'
-    mentor_id = Column(Integer, ForeignKey('mentors_id'), primary_key=True)
-    team_id = Column(Integer, ForeignKey('teams_id'), primary_key=True)
+    mentor_id = Column(Integer, ForeignKey('mentors.id'), primary_key=True)
+    team_id = Column(Integer, ForeignKey('teams.id'), primary_key=True)

@@ -28,6 +28,11 @@ def get_skill(skill_name):
     return skill
 
 
+def get_team(team_name):
+    team = session.query(PublicTeam).filter(team_name == PublicTeam.name).one()
+    return team
+
+
 def insert_team(name, idea_desc, repo, need_members, members_needed_desc,
                 room, place, techs):
     team = PublicTeam(name=name, idea_description=idea_desc,   repository=repo,
@@ -41,5 +46,10 @@ def insert_team(name, idea_desc, repo, need_members, members_needed_desc,
     session.commit()
 
 
-def insert_mentor():
-    pass
+def insert_mentor(name, description, picture, teams):
+    mentor = Mentor(name=name, description=description, picture=picture)
+    for team in teams:
+        t = get_team(team['name'])
+        mentor.teams.append(t)
+    session.add(mentor)
+    session.commit()
