@@ -32,6 +32,7 @@ def create_table(obj):
     return query
 
 
+# GET KWARGS METHOD - ORDERED DICT
 def insert(classname, *args, **kwargs):
     query = "INSERT INTO {} (".format(classname.__tablename__.upper())
     key_vals = list(kwargs.keys())
