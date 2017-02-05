@@ -38,6 +38,12 @@ def get_team(team_name):
     return team
 
 
+def get_all_teams():
+    teams = [(team.name, team.idea_description) for team in session.query(
+        PublicTeam).all()]
+    return teams
+
+
 def insert_team(name, idea_desc, repo, need_members, members_needed_desc,
                 room, techs, place="null"):
     team = PublicTeam(name=name, idea_description=idea_desc,   repository=repo,
