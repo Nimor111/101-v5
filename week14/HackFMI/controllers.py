@@ -83,3 +83,36 @@ def get_mentor_teams(mentor_name):
                                                team.room,
                                                [skill.name for skill in
                                                 team.skills]))
+
+
+def get_mentor_rooms(mentor_name):
+    mentor = get_mentor(mentor_name)
+    rooms = []
+    for team in mentor.teams:
+        rooms.append(team.room)
+
+    sorted_rooms = sorted([int(room) for room in rooms if room != 'mazata'])
+    if 'mazata' in rooms:
+        sorted_rooms.append('mazata')
+
+    return sorted_rooms
+
+
+def remove_skill(team_name, skill_name):
+    team = get_team(team_name)
+    for skill in team.skills:
+        if skill.name == skill_name:
+            team.skills.remove(skill)
+
+
+def add_skill_to_team(team_name, skills):
+    team = get_team(team_name)
+    for skill in skills:
+        s = get_skill(skill)
+        if s not in team.skills:
+            team.skills.append(s)
+
+
+def update_team_attr(team_name, attr, new_value):
+    team = get_team(team_name)
+    setattr(team, attr, new_value)
