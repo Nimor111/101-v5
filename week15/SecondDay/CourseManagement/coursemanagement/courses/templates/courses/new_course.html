@@ -1,0 +1,18 @@
+<h1>ADDING NEW COURSES TO THE MANAGEMENT SYSTEM</h1>
+
+<form method='POST' action="{% url 'new' %}">
+{% csrf_token %}
+  <p>Add a course</p>
+  <label>Enter course name: </label>
+  <input type="text" name="name"/><br />
+  <label>Enter course description: </label>
+  <input type="text" name="description"><br />
+  <label>Enter start date</label>
+  <input type="date" name="start_date"><br />
+  <label>Enter end date</label>
+  <input type="date" name="end_date"><br />
+  <input type="submit" value="Go!" />
+  {% if course_created %}
+    <p>Course added.</p>
+  {% endif %}
+</form>
