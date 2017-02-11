@@ -1,0 +1,18 @@
+<h1>EDITING {{ course.name }}. Leave field blank if you don't want
+to change it.</h1>
+
+<form method='POST' action="{% url 'courses:edit' course.name %}">
+{% csrf_token %}
+  <label>Enter new course name: </label>
+  <input type="text" name="name"/><br />
+  <label>Enter new course description: </label>
+  <input type="text" name="description"><br />
+  <label>Enter new start date</label>
+  <input type="date" name="start_date"><br />
+  <label>Enter new end date</label>
+  <input type="date" name="end_date"><br />
+  <input type="submit" value="Go!" />
+  {% if course_edited %}
+    <p>Course edited.</p>
+  {% endif %}
+</form>

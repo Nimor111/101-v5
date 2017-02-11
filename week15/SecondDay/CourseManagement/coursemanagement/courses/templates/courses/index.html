@@ -15,6 +15,15 @@
           <th>End Date</th>
           <th>Approx. Duration</th>
         </tr>
+        {% for course in courses %}
+        <tr>
+          <th>{{ course.name }}</th>
+          <th>{{ course.description }}</th>
+          <th>{{ course.start_date }}</th>
+          <th>{{ course.end_date }}</th>
+          <th>{{ course.calc_approx_duration }}</th>
+        </tr>
+        {% endfor %}
       </thead>
     </table>
   </body>
