@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 from .models import Course
+from lectures.models import Lecture
 
 
 # Create your views here.
@@ -29,7 +30,11 @@ def new(request):
     return render(request, 'courses/new_course.html', locals())
 
 
-def detail_course(request, *args, **kwargs):
+def detail_course(request, course_name):
+    course = get_object_or_404(Course, name=course_name)
+
+    lectures = list(course.lecture_set.all())
+
     return render(request, 'courses/course_detail.html', locals())
 
 

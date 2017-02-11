@@ -1,0 +1,22 @@
+ADDING NEW LECTURE
+
+<form method='POST' action="{% url 'lectures:new' %}">
+{% csrf_token %}
+  <p>Add a lecture</p>
+  <label>Enter lecture name: </label>
+  <input type="text" name="name"/><br />
+  <label>Enter week: </label>
+  <input type="text" name="week"><br />
+  <label>Enter lecture url</label>
+  <input type="text" name="url"><br />
+  <label>Enter course</label>
+  <select name='dropdown'>
+  {% for course in courses %}
+  <option value={{ course.id }}>{{ course.name }}</option>
+  {% endfor %}
+  </select><br />
+  <input type="submit" value="Go!" />
+  {% if lecture_created %}
+    <p>Lecture added.</p>
+  {% endif %}
+</form>

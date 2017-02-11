@@ -1,6 +1,6 @@
 <h1>ADDING NEW COURSES TO THE MANAGEMENT SYSTEM</h1>
 
-<form method='POST' action="{% url 'course:new' %}">
+<form method='POST' action="{% url 'courses:new' %}">
 {% csrf_token %}
   <p>Add a course</p>
   <label>Enter course name: </label>

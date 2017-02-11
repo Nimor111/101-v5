@@ -1,0 +1,18 @@
+<h1> Details for lecture {{ lecture.name }} of course {{ lecture.course.name }} </h1>
+
+<table border=2 align='center'>
+  <thead>
+    <tr>
+      <th>Lecture name</th>
+      <th>Lecture week</th>
+      <th>Lecture slides url</th>
+      <th>Course</th>
+    </tr>
+    <tr>
+      <th>{{ lecture.name }}</th>
+      <th>week {{ lecture.week }}</th>
+      <th>{{ lecture.url }}</th>
+      <th>{{ lecture.course.name }}</th>
+    </tr>
+  </thead>
+</table>

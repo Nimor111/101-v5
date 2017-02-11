@@ -10,4 +10,4 @@ class Course(models.Model):
 
     def calc_approx_duration(self):
         if self.start_date is not None and self.end_date is not None:
-            return self.end_date - self.start_date
+            return str(self.end_date - self.start_date).split(',')[0]

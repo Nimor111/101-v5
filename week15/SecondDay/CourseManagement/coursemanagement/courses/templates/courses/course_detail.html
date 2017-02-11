@@ -1,1 +1,6 @@
-DETAIL OF COURSE
+<h1> Lectures for {{ course.name }} </h1>
+
+{% for lecture in lectures  %}
+<h3>{{ lecture.name }}</h3>
+<p><a href="{% url 'lectures:index' lecture.id %}">Lecture description</a></p>
+{% endfor %}

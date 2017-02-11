@@ -1,0 +1,23 @@
+<h1>EDITING {{ lecture.name }}. Leave field blank if you don't want
+to change it.</h1>
+
+<form method='POST' action="{% url 'lectures:edit' lecture.id %}">
+{% csrf_token %}
+  <label>Enter new lecture name: </label>
+  <input type="text" name="name"/><br />
+  <label>Enter new lecture week: </label>
+  <input type="number" name="week"><br />
+  <label>Enter new url</label>
+  <input type="text" name="url"><br />
+  <label>Enter new course</label>
+  <select name='dropdown'>
+    <option display:none></option>
+  {% for course in courses %}
+  <option value={{ course.id }}>{{ course.name }}</option>
+  {% endfor %}
+  </select><br />
+  <input type="submit" value="Go!" />
+  {% if lecture_edited %}
+    <p>Lecture edited.</p>
+  {% endif %}
+</form>

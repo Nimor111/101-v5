@@ -4,6 +4,8 @@
   <head>
     <style>
       body {background-color: #008080;}
+      a {color: #fff;}
+      a:hover {color: #000;}
     </style>
   </head>
   <body>
@@ -17,7 +19,7 @@
         </tr>
         {% for course in courses %}
         <tr>
-          <th>{{ course.name }}</th>
+          <th><a href="course/{{ course.name }}">{{ course.name }}</a></th>
           <th>{{ course.description }}</th>
           <th>{{ course.start_date }}</th>
           <th>{{ course.end_date }}</th>
