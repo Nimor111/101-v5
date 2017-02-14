@@ -74,7 +74,7 @@ def profile(request):
         elif request.POST.get('+lecture'):
             return redirect("/lecture/new")
         elif request.POST.get('$lecture'):
-            return redirect("/course/{}".format(perm.course.name))
+            return redirect("/course/{}".format(perm.course.all()[0].name))
         return logout(request)
     error = None
     try:

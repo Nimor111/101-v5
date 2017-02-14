@@ -19,8 +19,8 @@ class User(models.Model):
 
 
 class Student(User):
-    course = models.ForeignKey(Course)
+    course = models.ManyToManyField(Course)
 
 
 class Teacher(User):
-    course = models.ForeignKey(Course)
+    course = models.ManyToManyField(Course)
