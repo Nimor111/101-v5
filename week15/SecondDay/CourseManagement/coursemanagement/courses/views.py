@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from django.urls import reverse
 
@@ -11,6 +11,12 @@ from lectures.models import Lecture
 # Create your views here.
 def index(request):
     courses = Course.objects.all()
+
+    if request.method == 'POST':
+        if request.POST.get('RegButton'):
+            return redirect('website/register')
+        else:
+            return redirect('website/login')
 
     return render(request, 'courses/index.html', locals())
 

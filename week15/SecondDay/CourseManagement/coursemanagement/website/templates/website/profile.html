@@ -2,8 +2,25 @@
 
 {{ greeting }}
 
+<form method='POST'>
+{% csrf_token %}
+<input type="submit" value="Home" name="home">
+</form>
+
+{% if teacher %}
+<form method='POST'>
+{% csrf_token %}
+<input type="submit" value="Add lecture" name="+lecture">
+</form>
+{% endif %}
+
+<form method='POST'>
+{% csrf_token %}
+<input type="submit" value="View lectures" name="$lecture">
+</form>
+
 <br />
-<form method="POST">
+<form method='POST'>
 {% csrf_token %}
 <input type="submit" value="Logout" name="logout">
 </form>

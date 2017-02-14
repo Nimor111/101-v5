@@ -4,11 +4,11 @@ ADDING NEW LECTURE
 {% csrf_token %}
   <p>Add a lecture</p>
   <label>Enter lecture name: </label>
-  <input type="text" name="name"/><br />
+  <input type="text" name="name" required><br />
   <label>Enter week: </label>
-  <input type="text" name="week"><br />
+  <input type="text" name="week" required><br />
   <label>Enter lecture url</label>
-  <input type="text" name="url"><br />
+  <input type="text" name="url" required><br />
   <label>Enter course</label>
   <select name='dropdown'>
   {% for course in courses %}

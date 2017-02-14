@@ -10,6 +10,13 @@
   </head>
   <body>
     <h1 align="center">Courses index</h1>
+    <div align="center">
+      <form method="POST">
+      {% csrf_token %}
+        <input type="submit" value="Register" name="RegButton" style="display: inline;">
+        <input type="submit" value="Login" name="LogButton" style="display: inline;">
+      </form>
+    </div>
     <table border="2" align="center">
       <thead>
         <tr>

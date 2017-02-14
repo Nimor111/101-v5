@@ -1,11 +1,21 @@
 <h1> Registration </h1>
+{% if error %} <p><strong>{{ error }}</strong></p> {% endif %}
+
+<form method='POST'>
+{% csrf_token %}
+<input type="submit" value="Home" name="home">
+</form>
 
 <form method='POST' action="{% url 'website:register' %}">
 {% csrf_token %}
 <label>Enter email</label>
-<input type="text" name="email"><br />
+<input type="text" name="email" required><br />
 <label>Enter password</label>
-<input type="text" name="password"><br />
+<input type="text" name="password" required><br />
+<label>Enter your first name</label>
+<input type="text" name="firstname"><br />
+<label>Enter your last name</label>
+<input type="text" name="lastname"><br />
 <input type="submit" value="Go!" />
 {% if registered %}
 <p>Registered.</p>
