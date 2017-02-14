@@ -1,5 +1,11 @@
 ADDING NEW LECTURE
 
+<form method='POST'>
+{% csrf_token %}
+<input type="submit" value="Home" name="home">
+</form>
+
+
 <form method='POST' action="{% url 'lectures:new' %}">
 {% csrf_token %}
   <p>Add a lecture</p>

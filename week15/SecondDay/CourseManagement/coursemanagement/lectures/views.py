@@ -1,14 +1,28 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from django.http import Http404
 
 from courses.models import Course
 from .models import Lecture
+from website.models import Student, Teacher
 
 
 # Create your views here.
 def index(request, lecture_id):
     lecture = get_object_or_404(Lecture, pk=lecture_id)
+    perm = None
+    teacher = student = False
+
+    if request.session.get('email'):
+        try:
+            perm = Teacher.objects.get(email=request.session.get('email'))
+            teacher = True
+        except Teacher.DoesNotExist:
+            perm = Student.objects.get(email=request.session.get('email'))
+            student = True
+    if request.method == 'POST':
+        if request.POST.get('~lecture'):
+            return redirect('/lecture/edit/{}'.format(lecture.id))
 
     return render(request, 'lectures/index.html', locals())
 
@@ -17,6 +31,9 @@ def new(request):
     lecture_created = False
     courses = Course.objects.all()
     if request.method == 'POST':
+        if request.POST.get('home'):
+            return redirect('/')
+
         name = request.POST.get('name')
         week = request.POST.get('week')
         url = request.POST.get('url')
@@ -33,6 +50,9 @@ def edit(request, lecture_id):
     lecture_edited = False
 
     if request.method == 'POST':
+        if request.POST.get('home'):
+            return redirect('/')
+
         if request.POST.get('dropdown'):
             course = get_object_or_404(Course, pk=request.POST.get('dropdown'))
             lecture.course = course

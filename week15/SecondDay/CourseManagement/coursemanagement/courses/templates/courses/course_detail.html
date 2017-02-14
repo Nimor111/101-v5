@@ -1,5 +1,11 @@
 <h1> Lectures for {{ course.name }} </h1>
 
+<form method='POST'>
+{% csrf_token %}
+<input type="submit" value="Home" name="home">
+</form>
+
+
 {% for lecture in lectures  %}
 <h3>{{ lecture.name }}</h3>
 <p><a href="{% url 'lectures:index' lecture.id %}">Lecture description</a></p>

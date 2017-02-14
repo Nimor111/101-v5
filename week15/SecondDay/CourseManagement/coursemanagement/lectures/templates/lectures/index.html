@@ -1,5 +1,10 @@
 <h1> Details for lecture {{ lecture.name }} of course {{ lecture.course.name }} </h1>
 
+<form method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Edit lecture" name="~lecture">
+</form>
+
 <table border=2 align='center'>
   <thead>
     <tr>

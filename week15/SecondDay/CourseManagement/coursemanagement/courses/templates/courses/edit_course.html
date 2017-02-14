@@ -1,6 +1,11 @@
 <h1>EDITING {{ course.name }}. Leave field blank if you don't want
 to change it.</h1>
 
+<form method='POST'>
+{% csrf_token %}
+<input type="submit" value="Home" name="home">
+</form>
+
 <form method='POST' action="{% url 'courses:edit' course.name %}">
 {% csrf_token %}
   <label>Enter new course name: </label>

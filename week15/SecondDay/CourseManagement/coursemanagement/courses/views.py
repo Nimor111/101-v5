@@ -24,6 +24,9 @@ def index(request):
 def new(request):
     course_created = False
     if request.method == 'POST':
+        if request.POST.get('home'):
+            return redirect('/')
+
         name = request.POST['name']
         description = request.POST['description']
         start_date = request.POST['start_date']
@@ -37,6 +40,9 @@ def new(request):
 
 
 def detail_course(request, course_name):
+    if request.method == 'POST':
+        if request.POST.get('home'):
+            return redirect('/')
     course = get_object_or_404(Course, name=course_name)
 
     lectures = list(course.lecture_set.all())
@@ -47,6 +53,9 @@ def detail_course(request, course_name):
 def edit_course(request, course_name, *args, **kwargs):
     course = get_object_or_404(Course, name=course_name)
     if request.method == 'POST':
+        if request.POST.get('home'):
+            return redirect('/')
+
         attrs = [attr for attr in list(course.__dict__.keys())
                  if attr != '_state' and attr != 'id']
         course_edited = False
