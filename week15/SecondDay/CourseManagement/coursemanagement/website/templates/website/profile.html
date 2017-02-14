@@ -1,0 +1,9 @@
+{% if error %} <p><strong>{{ error }}</strong></p>{% endif %}
+
+{{ greeting }}
+
+<br />
+<form method="POST">
+{% csrf_token %}
+<input type="submit" value="Logout" name="logout">
+</form>
