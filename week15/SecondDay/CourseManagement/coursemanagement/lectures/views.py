@@ -2,12 +2,15 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from django.http import Http404
 
+from website.decorators import login_required
+
 from courses.models import Course
 from .models import Lecture
 from website.models import Student, Teacher
 
 
 # Create your views here.
+@login_required(redirect_url='/website/login')
 def index(request, lecture_id):
     lecture = get_object_or_404(Lecture, pk=lecture_id)
     perm = None

@@ -4,6 +4,10 @@ from .decorators import anon_required, login_required
 
 from .models import User, Student, Teacher
 
+from .forms import LoginForm
+
+from .forms2 import RegisterForm
+
 
 # Create your views here.
 def index(request):
@@ -16,18 +20,18 @@ def register(request):
     if request.method == 'POST':
         if request.POST.get('home'):
             return redirect("/")
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        firstname = request.POST.get('firstname')
-        lastname = request.POST.get('lastname')
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            if not User.objects.filter(email=form.cleaned_data['email'])\
+                                      .exists():
+                form.save()
+                registered = True
+                return redirect('/website/login')
+            else:
+                error = 'User already exists'
 
-        if not User.objects.filter(email=email).exists():
-            user = User(email=email, password=password, first_name=firstname,
-                        last_name=lastname)
-            registered = True
-            user.save()
-        else:
-            error = 'User already exists'
+    else:
+        form = RegisterForm()
 
     return render(request, 'website/register.html', locals())
 
@@ -37,16 +41,17 @@ def login(request):
     if request.method == 'POST':
         if request.POST.get('home'):
             return redirect("/")
-        email = request.POST.get('email')
-        password = request.POST.get('password')
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            u = form.save()
+            if u is not None:
+                request.session['email'] = form.cleaned_data['email']
+                return redirect("/website/profile/")
+            else:
+                error = "No such user! Register or try again!"
+    else:
+        form = LoginForm()
 
-        u = User.login(email, password)
-
-        if u is not None:
-            request.session['email'] = email
-            return redirect("/website/profile/")
-        else:
-            error = "No such user! Register or try again!"
     return render(request, 'website/login.html', locals())
 
 
@@ -66,8 +71,11 @@ def profile(request):
         perm = Teacher.objects.get(email=request.session['email'])
         teacher = True
     except Teacher.DoesNotExist:
-        perm = Student.objects.get(email=request.session['email'])
-        student = True
+        try:
+            perm = Student.objects.get(email=request.session['email'])
+            student = True
+        except Student.DoesNotExist:
+            return redirect('/')
     if request.method == 'POST':
         if request.POST.get('home'):
             return redirect("/")
