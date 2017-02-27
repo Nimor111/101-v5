@@ -1,0 +1,28 @@
+{% extends "website/base.html" %}
+
+{% block body%}
+    <center><h1>Details for Task {{ task.pk }}</h1></center>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>{{ task.name }}</h3>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>{{ task.course.name }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>{{ task.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

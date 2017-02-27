@@ -4,6 +4,7 @@ from django.contrib import admin
 from courses import views
 
 urlpatterns = [
+    url(r'^task/', include('tasks.urls')),
     url(r'^website/', include('website.urls')),
     url(r'^lecture/', include('lectures.urls')),
     url(r'^course/', include('courses.urls')),

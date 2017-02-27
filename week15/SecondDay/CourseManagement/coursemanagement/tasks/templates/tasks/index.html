@@ -1,0 +1,32 @@
+{% extends "website/base.html" %}
+<html lang="en">
+<head>
+    {% block title %} Tasks {% endblock %} 
+</head>
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Course</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if all_tasks %}
+                    {% for task in all_tasks %}
+                        <th>{{ task.name }}</th>
+                        <th>{{ task.description }}</th>
+                        <th>{{ task.course.name }}</th>
+                    {% endfor %}
+                {% else %}
+                    <h1>No tasks to show.</h1>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
