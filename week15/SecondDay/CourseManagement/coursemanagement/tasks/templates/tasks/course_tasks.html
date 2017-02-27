@@ -18,7 +18,7 @@
             <tbody>
                 {% if course_tasks %}
                     {% for task in course_tasks %}
-                        <th>{{ task.name }}</th>
+                        <th><a href="/task/{{ task.pk }}">{{ task.name }}</a></th>
                         <th>{{ task.description }}</th>
                     {% endfor %}
                 {% else %}
