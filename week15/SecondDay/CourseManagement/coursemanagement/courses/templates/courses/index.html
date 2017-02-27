@@ -23,6 +23,7 @@
           <th>Course Name</th><th>Description</th><th>Start Date</th>
           <th>End Date</th>
           <th>Approx. Duration</th>
+          <th>Tasks</th>
         </tr>
         {% for course in courses %}
         <tr>
@@ -31,6 +32,7 @@
           <th>{{ course.start_date }}</th>
           <th>{{ course.end_date }}</th>
           <th>{{ course.calc_approx_duration }}</th>
+          <th><a href="task/course/{{ course.pk }}">Tasks</a></th>
         </tr>
         {% endfor %}
       </thead>

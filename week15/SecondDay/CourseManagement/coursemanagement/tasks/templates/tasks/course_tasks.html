@@ -1,0 +1,31 @@
+{% extends "website/base.html" %}
+<html lang="en">
+<head>
+    {% block title %} Tasks {% endblock %} 
+</head>
+
+{% block body %}
+<center><h1>Tasks for {{ course.name }}</h1></center>
+<div class="container">
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if course_tasks %}
+                    {% for task in course_tasks %}
+                        <th>{{ task.name }}</th>
+                        <th>{{ task.description }}</th>
+                    {% endfor %}
+                {% else %}
+                    <h1>No tasks to show.</h1>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
