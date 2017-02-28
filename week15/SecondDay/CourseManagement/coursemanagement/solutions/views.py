@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from .forms import SolutionForm
 
 from website.models import Student
+from .models import Solution
 
 
 # Create your views here.
@@ -22,3 +23,12 @@ class SolutionCreateView(generic.CreateView):
         solution.date = datetime.now()
         solution.save()
         return HttpResponseRedirect(self.success_url)
+
+
+class SolutionUpdateView(generic.UpdateView):
+    model = Solution
+    template_name = 'solutions/edit_solution.html'
+    form_class = SolutionForm
+
+    def get_success_url(self):
+        return '/website/profile'
