@@ -1,4 +1,4 @@
-def populate_hash(hash, string)
+def populate_hash(decode_hash, string)
   counter = 1
   0.upto(string.length) do |i|
     until string[i] != decode_hash.key(decode_hash[string[i]])

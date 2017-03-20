@@ -80,7 +80,6 @@ class PandaSocialNetworkTests(unittest.TestCase):
 
     def test_friends_of_panda_with_0_friends(self):
         panda1 = Panda('name', '1@hb.com', 'male')
-        panda2 = Panda('name', '2@hb.com', 'male')
         self.panda_social_network.add_panda(panda1)
         self.assertEqual(self.panda_social_network.friends_of(panda1),
                          set())
