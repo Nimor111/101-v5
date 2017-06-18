@@ -46,7 +46,7 @@ def get_all_teams():
 
 def insert_team(name, idea_desc, repo, need_members, members_needed_desc,
                 room, techs, place="null"):
-    team = PublicTeam(name=name, idea_description=idea_desc,   repository=repo,
+    team = PublicTeam(name=name, idea_description=idea_desc, repository=repo,
                       need_more_members=need_members,
                       members_needed_desc=members_needed_desc, room=room,
                       place=place)

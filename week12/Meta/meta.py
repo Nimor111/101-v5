@@ -45,7 +45,7 @@ class Serializer(metaclass=SerializerMeta):
 
         return json.dumps({field_name: field.transform(
                           getattr(self._obj, field_name))
-             for field_name, field in self._fields.items()}, indent=4)
+            for field_name, field in self._fields.items()}, indent=4)
 
 
 class Comment(object):

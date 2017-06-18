@@ -24,15 +24,15 @@ class PublicTeam(Base):
     room = Column(String(255))
     place = Column(String(255), nullable=True)
     skills = relationship(
-            'SkillList',
-            secondary='team_skills',
-            back_populates='teams'
-            )
+        'SkillList',
+        secondary='team_skills',
+        back_populates='teams'
+    )
     mentors = relationship(
-                'Mentors',
-                secondary='team_mentors',
-                back_populates='teams'
-                )
+        'Mentors',
+        secondary='team_mentors',
+        back_populates='teams'
+    )
 
 
 class SkillList(Base):
@@ -41,10 +41,10 @@ class SkillList(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False)
     teams = relationship(
-            PublicTeam,
-            secondary='team_skills',
-            back_populates='skills'
-            )
+        PublicTeam,
+        secondary='team_skills',
+        back_populates='skills'
+    )
 
 
 class Mentors(Base):
@@ -55,10 +55,10 @@ class Mentors(Base):
     description = Column(String(255), nullable=False)
     picture = Column(String(255))
     teams = relationship(
-            PublicTeam,
-            secondary='team_mentors',
-            back_populates='mentors'
-            )
+        PublicTeam,
+        secondary='team_mentors',
+        back_populates='mentors'
+    )
 
 
 class TeamSkills(Base):
